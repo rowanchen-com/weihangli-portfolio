@@ -1,0 +1,23 @@
+interface RollingTextProps {
+  children: string;
+  className?: string;
+}
+
+export function RollingText({ children, className }: RollingTextProps) {
+  return (
+    <span
+      className={`relative inline-flex flex-col overflow-hidden ${className ?? ""}`}
+      style={{ height: "1.2em" }}
+    >
+      <span className="group-hover:-translate-y-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] will-change-transform">
+        {children}
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-full group-hover:-translate-y-full transition-transform duration-[0.4s] ease-[cubic-bezier(.51,.92,.24,1.15)] will-change-transform"
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
