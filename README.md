@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Weihang Li — Portfolio
 
-## Getting Started
+A single-page portfolio site for **Weihang Li** (Full Stack Developer), built with the Next.js App Router. It presents hero, services, selected work, about, and contact sections with scroll-driven layout and motion.
 
-First, run the development server:
+**Other languages:** [简体中文](README.zh-CN.md)
+
+## Features
+
+- Section-based landing page (hero, what I do, selected works, about, contact, footer)
+- Project cards with imagery and scroll-linked interactions
+- Smooth scrolling (Lenis) and animation (GSAP, Motion)
+- Contact form that posts to a server route and sends email via [Resend](https://resend.com)
+
+## Tech stack
+
+- **Framework:** Next.js 16 (App Router), React 19, TypeScript
+- **Styling:** Tailwind CSS 4
+- **UI:** Radix UI primitives, Lucide icons, class-variance-authority / clsx / tailwind-merge
+- **Motion:** GSAP, Motion, `@gsap/react`
+- **Scrolling:** Lenis
+- **Forms:** react-hook-form
+- **Email:** Resend + `@react-email/components` for the outgoing template
+
+## Prerequisites
+
+- **Node.js** — use a current **LTS** release (recommended for Next.js 16).
+
+## Getting started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser. Edit files under `src/`; the app hot-reloads during development.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start dev server         |
+| `npm run build` | Production build        |
+| `npm run start` | Run production server   |
+| `npm run lint`  | Run ESLint              |
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+The contact flow in [`src/app/api/send/route.ts`](src/app/api/send/route.ts) uses Resend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`RESEND_API_KEY`** — required for sending mail from the API route. Set it locally (e.g. `.env.local`) and in your hosting provider’s environment settings for production and preview deployments.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Verify your sending domain in the Resend dashboard and adjust the `from` address (and any routing) in `route.ts` to match your verified domain. Do not commit real API keys.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deploy anywhere that supports Next.js (e.g. [Vercel](https://vercel.com)). Configure `RESEND_API_KEY` in the project’s environment variables.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js — Deploying](https://nextjs.org/docs/app/building-your-application/deploying)
+
+## License
+
+Private project (`"private": true` in `package.json`).
