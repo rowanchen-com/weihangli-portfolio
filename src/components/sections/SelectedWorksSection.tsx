@@ -1,44 +1,47 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Counter from "@/components/counter/Counter";
 import ProjectCard from "@/components/project-card/ProjectCard";
 import SplitText from "@/components/text/SplitText";
 import FadeUp from "@/components/text/FadeUp";
 
-const projects = [
+const PROJECT_ASSETS = [
   {
     bgImage: "/images/projects/works_bg_01.webp",
     previewImage: "/images/projects/works_profolio.jpg",
-    category: "Modern Portfolio Website",
-    title: "My Profolio",
-    year: "2026",
-    tags: ["Next.js", "Framer Motion"],
   },
   {
     bgImage: "/images/projects/works_bg_02.webp",
     previewImage: "/images/projects/works_hynel.jpg",
-    category: "SaaS Platform",
-    title: "Hynel Energy",
-    year: "2025",
-    tags: ["Vue", "Full-stack", "Dashboard"],
   },
   {
     bgImage: "/images/projects/works_bg_03.webp",
     previewImage: "/images/projects/works_vehicle_search.jpg",
-    category: "Desktop Application",
-    title: "Vehicle Search Script",
-    year: "2025",
-    tags: ["Electron", "Tooling"],
   },
-];
+] as const;
+
+type ProjectCopy = {
+  category: string;
+  title: string;
+  year: string;
+  tags: string[];
+};
 
 export default function SelectedWorksSection() {
+  const t = useTranslations("Works");
+  const projects = t.raw("projects") as ProjectCopy[];
+  const merged = PROJECT_ASSETS.map((assets, idx) => ({
+    ...assets,
+    ...projects[idx],
+  }));
+
   const [activeIndex, setActiveIndex] = useState(1);
   const activeIndexRef = useRef(1);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const metricsRef = useRef<Record<number, { ratio: number; bottom: number }>>(
-    {}
+    {},
   );
   const scrollYRef = useRef(0);
 
@@ -66,9 +69,8 @@ export default function SelectedWorksSection() {
         });
 
         const current = activeIndexRef.current;
-        const maxIndex = projects.length;
+        const maxIndex = merged.length;
 
-        // 向下滚动：当前卡片底部离开视口顶部，切到下一张。
         if (
           direction === "down" &&
           current < maxIndex &&
@@ -78,7 +80,6 @@ export default function SelectedWorksSection() {
           return;
         }
 
-        // 向上滚动：上一张卡片可见达到 50%，切回上一张。
         if (direction === "up" && current > 1) {
           const previousIndex = current - 1;
           if ((metricsRef.current[previousIndex]?.ratio ?? 0) >= 0.5) {
@@ -89,7 +90,7 @@ export default function SelectedWorksSection() {
       {
         root: null,
         threshold: [0, 0.5, 1],
-      }
+      },
     );
 
     cardRefs.current.forEach((node, idx) => {
@@ -99,18 +100,18 @@ export default function SelectedWorksSection() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [merged.length]);
 
   return (
     <section id="works" className="space-y-12 bg-secondary px-10 py-20 text-secondary-foreground">
       <div>
         <SplitText stagger={0.04} duration={0.8} yOffset={50} className="mb-20 text-6xl leading-none font-semibold tracking-tighter uppercase md:text-[7vw]">
-          SELECTED WORKS /
+          {t("heading")}
         </SplitText>
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 flex flex-col gap-x-18 gap-y-6 md:col-start-6 md:col-span-7 sm:flex-row">
             <span className="text-md text-nowrap text-secondary-foreground/50 tracking-tighter uppercase">
-              (PROJECTS)
+              {t("label")}
             </span>
 
             <FadeUp
@@ -118,7 +119,7 @@ export default function SelectedWorksSection() {
               delay={0.15}
               once={false}
             >
-              Thoughtfully crafted digital experiences that blend utility and aesthetics into something functional, memorable, and refined.
+              {t("intro")}
             </FadeUp>
           </div>
         </div>
@@ -132,7 +133,7 @@ export default function SelectedWorksSection() {
           />
         </div>
         <div className="col-span-12 flex flex-col gap-y-18 md:gap-y-20 lg:gap-y-28 md:col-span-7 md:pt-5">
-          {projects.map((project, idx) => (
+          {merged.map((project, idx) => (
             <ProjectCard
               key={`${project.title}-${idx}`}
               ref={(el) => {

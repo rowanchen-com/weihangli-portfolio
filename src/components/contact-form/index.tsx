@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { FormField } from "./form-field";
 import { FormSubmitButton } from "./form-button";
 import { FormStatusOverlay } from "./form-status";
@@ -16,6 +17,7 @@ type FormState = {
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
+  const t = useTranslations("Form");
   const {
     register,
     handleSubmit,
@@ -61,29 +63,29 @@ export default function ContactForm() {
         )}
       >
         <FormField
-          placeholder="Your name"
-          {...register("name", { required: "Please enter your name" })}
+          placeholder={t("namePlaceholder")}
+          {...register("name", { required: t("nameRequired") })}
           error={errors.name?.message}
         />
 
         <FormField
           type="email"
-          placeholder="Your email address"
+          placeholder={t("emailPlaceholder")}
           {...register("email", {
-            required: "Please enter your email",
+            required: t("emailRequired"),
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Please enter a valid email address",
+              message: t("emailInvalid"),
             },
           })}
           error={errors.email?.message}
         />
 
         <FormField
-          placeholder="Tell me about your business or project"
+          placeholder={t("messagePlaceholder")}
           textarea
           {...register("message", {
-            required: "Please describe your project",
+            required: t("messageRequired"),
           })}
           error={errors.message?.message}
         />

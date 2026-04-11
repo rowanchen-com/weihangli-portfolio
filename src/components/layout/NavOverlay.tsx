@@ -3,19 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Copy, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
 
-const navLinks: { label: string; id: SectionId }[] = [
-  { label: "Home", id: "home" },
-  { label: "Services", id: "services" },
-  { label: "Works", id: "works" },
-  { label: "About", id: "about" },
-  { label: "Contact", id: "contact" },
-];
+const NAV_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
 const socialLinks = [
-  // { label: "LinkedIn", href: "https://www.linkedin.com/in/liweihang/" },
-  { label: "Github", href: "https://github.com/hanggesimida" },
+  { labelKey: "github" as const, href: "https://github.com/hanggesimida" },
 ];
 
 const EMAIL = "hanggesimida@gmail.com";
@@ -46,6 +41,8 @@ const footerVariants = {
 };
 
 export default function NavOverlay() {
+  const t = useTranslations("Nav");
+  const tOverlay = useTranslations("NavOverlay");
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -77,7 +74,6 @@ export default function NavOverlay() {
 
   return (
     <>
-      {/* 汉堡 / 关闭 按钮 */}
       <motion.button
         animate={{ opacity: showButton ? 1 : 0, scale: showButton ? 1 : 0.8 }}
         whileHover={{ scale: 0.9 }}
@@ -85,8 +81,9 @@ export default function NavOverlay() {
         transition={{ duration: 0.2, ease: "easeInOut" }}
         style={{ pointerEvents: showButton ? "auto" : "none", cursor: "pointer" }}
         onClick={() => setIsOpen((v) => !v)}
-        aria-label={isOpen ? "关闭菜单" : "打开菜单"}
-        className="fixed top-9 right-8 z-nav-toggle p-3 bg-secondary-foreground rounded-full shadow-lg"
+        aria-label={isOpen ? tOverlay("closeMenu") : tOverlay("openMenu")}
+        type="button"
+        className="fixed top-9 right-8 z-[9999] p-3 bg-secondary-foreground rounded-full shadow-lg"
       >
         <svg width="35" height="35" viewBox="0 0 35 35" style={{ display: "block" }}>
           <motion.line
@@ -106,7 +103,6 @@ export default function NavOverlay() {
         </svg>
       </motion.button>
 
-      {/* 背景遮罩（点击可关闭） */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -115,30 +111,30 @@ export default function NavOverlay() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             aria-hidden="true"
-            className="fixed inset-0 z-nav-backdrop backdrop-blur-lg"
+            className="fixed inset-0 backdrop-blur-lg"
+            style={{ zIndex: 997 }}
           />
         )}
       </AnimatePresence>
 
-      {/* 悬浮层面板 */}
       <motion.div
         variants={menuVariants}
         initial="closed"
         animate={isOpen ? "opened" : "closed"}
         onClick={close}
-        className="fixed top-0 right-0 z-nav-panel h-screen w-screen flex justify-end"
+        className="fixed top-0 right-0 h-screen w-screen flex justify-end"
+        style={{ zIndex: 998 }}
       >
         <div
           onClick={(e) => e.stopPropagation()}
           className="w-full relative flex max-w-2xl flex-col justify-end overflow-hidden xl:max-w-3xl"
         >
-
-          {/* 导航链接 */}
           <nav className="relative h-full px-10 sm:px-16 flex items-center">
             <ul className="flex flex-col justify-center">
-              {navLinks.map(({ label, id }, i) => (
-                <li key={label} className="relative flex items-center overflow-hidden">
+              {NAV_IDS.map((id, i) => (
+                <li key={id} className="relative flex items-center overflow-hidden">
                   <motion.button
+                    type="button"
                     custom={i}
                     variants={linkVariants}
                     initial="initial"
@@ -147,7 +143,7 @@ export default function NavOverlay() {
                     className="group relative inline-block text-secondary-foreground font-bold uppercase leading-none tracking-tighter select-none cursor-pointer"
                     style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
                   >
-                    {label}
+                    {t(id)}
                     <span className="absolute left-0 bottom-1 h-0.5 w-0 bg-secondary-foreground transition-all duration-500 group-hover:w-full" />
                   </motion.button>
                 </li>
@@ -155,17 +151,16 @@ export default function NavOverlay() {
             </ul>
           </nav>
 
-          {/* 底部信息区 */}
           <motion.div
             variants={footerVariants}
             initial="initial"
             animate={isOpen ? "enter" : "initial"}
             className="flex flex-col items-start gap-y-6 px-10 pb-10 sm:px-16 sm:pb-14"
           >
-            {/* 邮箱 */}
+            <LocaleSwitcher tone="onDark" className="text-sm" />
             <div className="flex flex-col">
               <span className="text-base font-bold uppercase text-white/40">
-                Email Address
+                {tOverlay("emailLabel")}
               </span>
               <div className="flex items-center gap-x-2">
                 <a
@@ -175,8 +170,9 @@ export default function NavOverlay() {
                   {EMAIL}
                 </a>
                 <button
+                  type="button"
                   onClick={handleCopyEmail}
-                  aria-label="copy email"
+                  aria-label={tOverlay("copyEmail")}
                   className="text-white/40 hover:text-secondary-foreground transition-colors duration-200 cursor-pointer"
                 >
                   <AnimatePresence mode="wait" initial={false}>
@@ -206,17 +202,16 @@ export default function NavOverlay() {
               </div>
             </div>
 
-            {/* 社交链接 */}
             <ul className="flex flex-nowrap gap-x-6">
-              {socialLinks.map(({ label, href }) => (
-                <li key={label}>
+              {socialLinks.map(({ labelKey, href }) => (
+                <li key={labelKey}>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
                     href={href}
                     className="relative text-secondary-foreground font-medium text-base transition-colors duration-300 hover:text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
                   >
-                    {label}
+                    {tOverlay(labelKey)}
                   </a>
                 </li>
               ))}

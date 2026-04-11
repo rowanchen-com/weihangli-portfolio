@@ -1,0 +1,145 @@
+{
+  "Metadata": {
+    "title": "Weihang Li - Full Stack Developer",
+    "description": "Weihang Li - Full Stack Developer"
+  },
+  "Nav": {
+    "home": "Home",
+    "services": "Services",
+    "works": "Works",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Header": {
+    "roleMobile1": "Web Developer",
+    "roleMobile2": "& Designer",
+    "roleDesktop": "Web Developer & Designer"
+  },
+  "NavOverlay": {
+    "emailLabel": "Email Address",
+    "copyEmail": "Copy email",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "github": "Github"
+  },
+  "Hero": {
+    "tagline": "I build fast, modern digital products that drive business growth, available for freelance projects worldwide.",
+    "cta": "Contact",
+    "imageAlt": "Profile photo",
+    "availabilityMobileLine1": "Available For",
+    "availabilityMobileLine2": "Work",
+    "availabilityDesktop": "Available For Work"
+  },
+  "WhatIDo": {
+    "heading": "WHAT I DO /",
+    "label": "(Services)",
+    "intro": "I specialize in building fast, reliable, and user-friendly full-stack digital solutions. I bridge the gap between complex ideas and market-ready products that drive real business value and long-term growth.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Full-Stack Development",
+        "description": "I build end-to-end solutions, from intuitive frontend experiences to robust backend systems. Focused on web development and leveraging modern tech to build scalable, real-world applications.",
+        "skills": [
+          "React, Vue, Tailwind CSS",
+          "Node.js, Spring Boot",
+          "Git, Docker, Vercel, Alibaba Cloud"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Optimization",
+        "description": "I build systems that scale reliably, applying solid engineering principles to keep applications fast, stable, and future-ready.",
+        "skills": [
+          "Data Structures & Algorithms",
+          "DBMS, OOP, OS Fundamentals",
+          "Scalable systems & data pipelines"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "AI-Assisted Development",
+        "description": "I use AI tools to speed up development while maintaining solid engineering standards—supporting everything from rapid prototyping to scalable, well-structured systems.",
+        "skills": [
+          "Cursor, Codex, Claude",
+          "Rapid prototyping & iteration",
+          "Code quality & review"
+        ]
+      }
+    ]
+  },
+  "Works": {
+    "heading": "SELECTED WORKS /",
+    "label": "(PROJECTS)",
+    "intro": "Thoughtfully crafted digital experiences that blend utility and aesthetics into something functional, memorable, and refined.",
+    "projects": [
+      {
+        "category": "Modern Portfolio Website",
+        "title": "My Profolio",
+        "year": "2026",
+        "tags": ["Next.js", "Framer Motion"]
+      },
+      {
+        "category": "SaaS Platform",
+        "title": "Hynel Energy",
+        "year": "2025",
+        "tags": ["Vue", "Full-stack", "Dashboard"]
+      },
+      {
+        "category": "Desktop Application",
+        "title": "Vehicle Search Script",
+        "year": "2025",
+        "tags": ["Electron", "Tooling"]
+      }
+    ]
+  },
+  "About": {
+    "line1": "DEVELOPER",
+    "line2": "DESIGNER",
+    "line3": "CREATOR/",
+    "skillsHeading": "Skills",
+    "skillGroups": [
+      { "title": "Languages" },
+      { "title": "Frameworks & Libraries" },
+      { "title": "Tools & Databases" }
+    ],
+    "aboutImageAlt": "About image",
+    "lead": "I'm a full-stack developer and designer dedicated to crafting high-performance digital products that bridge the gap between complex logic and fluid design.",
+    "aboutLabel": "(About Me)",
+    "p1": "Leveraging a versatile stack from React and Node.js to Spring Boot and Python, I build scalable applications that thrive under pressure. Whether it's Web platforms, Mobile apps, or Desktop software, I focus on delivering seamless, end-to-end solutions for startups and businesses.",
+    "p2": "I believe in the power of micro-interactions and refined motion. My approach is simple: engineer for reliability, design for impact, and obsess over the details that elevate a product from functional to exceptional."
+  },
+  "Contact": {
+    "heading": "Let's Make It Happen",
+    "subheading": "Have a project in mind?"
+  },
+  "Form": {
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Your email address",
+    "messagePlaceholder": "Tell me about your business or project",
+    "nameRequired": "Please enter your name",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Please enter a valid email address",
+    "messageRequired": "Please describe your project",
+    "submitSending": "Sending…",
+    "submitIdle": "Let's Talk",
+    "successTitle": "Got it! I'll get back to you shortly.",
+    "successAgain": "Send another message",
+    "errorTitle": "Something went wrong. Please try again.",
+    "errorBack": "Go back"
+  },
+  "Footer": {
+    "menu": "Menu",
+    "socials": "Socials",
+    "wechat": "WeChat",
+    "wechatQrAlt": "WeChat QR Code",
+    "github": "Github",
+    "localTime": "Local Time",
+    "scrollToTop": "Scroll to top"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "zhCN": "简体中文",
+    "zhTW": "繁體中文"
+  }
+}

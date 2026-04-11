@@ -2,6 +2,7 @@
 
 import FadeUp from "@/components/text/FadeUp";
 import SplitText from "@/components/text/SplitText";
+import { useTranslations } from "next-intl";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 type Service = {
@@ -11,42 +12,6 @@ type Service = {
   skills: string[];
 };
 
-const services: Service[] = [
-  {
-    number: "01",
-    title: "Full-Stack Development",
-    description:
-      "I build end-to-end solutions, from intuitive frontend experiences to robust backend systems. Focused on web development and leveraging modern tech to build scalable, real-world applications.",
-    skills: [
-      "React, Vue, Tailwind CSS",
-      "Node.js, Spring Boot",
-      "Git, Docker, Vercel, Alibaba Cloud"
-    ],
-  },
-  {
-    number: "02",
-    title: "Optimization",
-    description:
-      "I build systems that scale reliably, applying solid engineering principles to keep applications fast, stable, and future-ready.",
-    skills: [
-      "Data Structures & Algorithms",
-      "DBMS, OOP, OS Fundamentals",
-      "Scalable systems & data pipelines",
-    ],
-  },
-  {
-    number: "03",
-    title: "AI-Assisted Development",
-    description:
-      "I use AI tools to speed up development while maintaining solid engineering standards—supporting everything from rapid prototyping to scalable, well-structured systems.",
-    skills: [
-      "Cursor, Codex, Claude",
-      "Rapid prototyping & iteration",
-      "Code quality & review",
-    ],
-  }
-];
-
 function getOffsets(prefix: number[], index: number) {
   const top = prefix[index];
   const remaining = prefix[prefix.length - 1] - prefix[index + 1];
@@ -54,6 +19,9 @@ function getOffsets(prefix: number[], index: number) {
 }
 
 export default function WhatIDoSection() {
+  const t = useTranslations("WhatIDo");
+  const services = t.raw("services") as Service[];
+
   const headerRefs = useRef<HTMLDivElement[]>([]);
   const [headerHeightsPx, setHeaderHeightsPx] = useState<number[]>(() =>
     Array(services.length).fill(0),
@@ -65,7 +33,7 @@ export default function WhatIDoSection() {
         (_, i) => headerRefs.current[i]?.getBoundingClientRect().height ?? 0,
       ),
     );
-  }, []);
+  }, [services]);
 
   const prefixHeights = useMemo(() => {
     const arr = [0];
@@ -97,13 +65,13 @@ export default function WhatIDoSection() {
       <div className="mb-12 md:mb-24">
         <h2 className="text-6xl md:text-[8vw] font-semibold tracking-tighter uppercase leading-none mb-20">
           <SplitText stagger={0.04} duration={0.8} yOffset={50}>
-            WHAT I DO /
+            {t("heading")}
           </SplitText>
         </h2>
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 md:col-start-6 md:col-span-7 flex flex-col sm:flex-row gap-x-18 gap-y-6">
             <span className="uppercase text-nowrap text-md text-secondary-foreground/50 tracking-tighter">
-              (Services)
+              {t("label")}
             </span>
 
             <FadeUp
@@ -111,7 +79,7 @@ export default function WhatIDoSection() {
               delay={0.15}
               once={false}
             >
-              I specialize in building fast, reliable, and user-friendly full-stack digital solutions. I bridge the gap between complex ideas and market-ready products that drive real business value and long-term growth.
+              {t("intro")}
             </FadeUp>
           </div>
         </div>

@@ -7,7 +7,7 @@ import WhatIDoSection from "@/components/sections/WhatIDoSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main className="relative">
       <HeroSection />

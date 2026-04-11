@@ -5,53 +5,54 @@ import FadeUp from "@/components/text/FadeUp";
 import SplitText from "@/components/text/SplitText";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import { useTranslations } from "next-intl";
 
-const skillGroups = [
-  {
-    title: "Languages",
-    items: [
-      "JavaScript",
-      "TypeScript",
-      "Java",
-      "Python",
-      "Dart",
-      "SQL",
-    ],
-  },
-  {
-    title: "Frameworks & Libraries",
-    items: [
-      "Vue",
-      "React",
-      "Node.js",
-      "Express.js",
-      "Electron",
-      "React Native",
-      "Spring Boot",
-      "Tailwind CSS",
-      "Framer Motion",
-      "GSAP",
-    ],
-  },
-  {
-    title: "Tools & Databases",
-    items: [
-      "Git",
-      "Apifox",
-      "Docker",
-      "Vercel",
-      "Alibaba Cloud",
-      "PostgreSQL",
-      "MySQL",
-      "SQLite",
-      "Redis",
-    ],
-  },
-];
+const SKILL_ITEMS = [
+  [
+    "JavaScript",
+    "TypeScript",
+    "Java",
+    "Python",
+    "Dart",
+    "SQL",
+  ],
+  [
+    "Vue",
+    "React",
+    "Node.js",
+    "Express.js",
+    "Electron",
+    "React Native",
+    "Spring Boot",
+    "Tailwind CSS",
+    "Framer Motion",
+    "GSAP",
+  ],
+  [
+    "Git",
+    "Apifox",
+    "Docker",
+    "Vercel",
+    "Alibaba Cloud",
+    "PostgreSQL",
+    "MySQL",
+    "SQLite",
+    "Redis",
+  ],
+] as const;
 
 export default function AboutSection() {
+  const t = useTranslations("About");
   const sectionRef = useRef<HTMLElement>(null);
+
+  const skillGroups = useMemo(() => {
+    const titles = t.raw("skillGroups") as { title: string }[];
+    return titles.map((g, i) => ({
+      title: g.title,
+      items: [...SKILL_ITEMS[i]],
+    }));
+  }, [t]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -76,17 +77,17 @@ export default function AboutSection() {
             <h2 className="order-2 col-span-12 flex flex-col lg:pt-24 font-semibold tracking-tighter leading-none md:order-1 lg:col-span-6 text-6xl sm:text-7xl md:text-[88px] lg:text-[96px]">
               <span className="block">
                 <SplitText stagger={0.04} duration={0.8} yOffset={50}>
-                  DEVELOPER
+                  {t("line1")}
                 </SplitText>
               </span>
               <span className="block">
                 <SplitText stagger={0.04} duration={0.8} yOffset={50}>
-                  DESIGNER
+                  {t("line2")}
                 </SplitText>
               </span>
               <span className="block">
                 <SplitText stagger={0.04} duration={0.8} yOffset={50}>
-                  CREATOR/
+                  {t("line3")}
                 </SplitText>
               </span>
             </h2>
@@ -95,7 +96,7 @@ export default function AboutSection() {
               <section className="self-start px-3 py-5 md:px-6">
                 <div className="mx-auto max-w-6xl">
                   <div className="mb-8 text-center tracking-tighter font-semibold text-[40px] sm:text-[50px] md:text-[clamp(70px,calc(70px+(90-70)*((100vw-768px)/(1280-768))),90px)] xl:text-[90px] leading-none">
-                    Skills
+                    {t("skillsHeading")}
                   </div>
 
                   <div className="grid grid-cols-3 gap-0 p-0 md:gap-5 md:p-5">
@@ -125,7 +126,7 @@ export default function AboutSection() {
             <div className="pointer-events-none relative max-h-[30rem] col-span-12 md:col-span-3 flex aspect-square w-full h-full items-center overflow-clip rounded-md sm:aspect-auto md:items-end">
               <Image
                 src="/images/about/me.webp"
-                alt="About image"
+                alt={t("aboutImageAlt")}
                 fill
                 sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover object-center"
@@ -137,33 +138,21 @@ export default function AboutSection() {
                 className="max-w-[39ch] text-balance text-2xl md:text-3xl lg:text-4xl font-medium leading-snug tracking-tight"
                 once={false}
               >
-                I&apos;m a full-stack developer and designer dedicated to crafting
-                high-performance digital products that bridge the gap between
-                complex logic and fluid design.
+                {t("lead")}
               </FadeUp>
 
               <div className="flex flex-col gap-x-10 gap-y-4 lg:flex-row">
                 <span className="font-mono uppercase text-secondary-foreground/70">
-                  (About Me)
+                  {t("aboutLabel")}
                 </span>
 
                 <div className="flex max-w-[38ch] flex-col gap-y-4 text-balance text-base md:text-lg lg:text-xl text-secondary-foreground/75 tracking-tight font-normal">
                   <FadeUp once={false}>
-                    <p>
-                      Leveraging a versatile stack from React and Node.js to Spring Boot and Python,
-                      I build scalable applications that thrive under pressure. Whether it&apos;s
-                      Web platforms, Mobile apps, or Desktop software, I focus on delivering
-                      seamless, end-to-end solutions for startups and businesses.
-                    </p>
+                    <p>{t("p1")}</p>
                   </FadeUp>
 
                   <FadeUp delay={0.12} once={false}>
-                    <p>
-                      I believe in the power of micro-interactions and refined motion.
-                      My approach is simple: engineer for reliability, design for impact,
-                      and obsess over the details that elevate a product from
-                      functional to exceptional.
-                    </p>
+                    <p>{t("p2")}</p>
                   </FadeUp>
                 </div>
               </div>

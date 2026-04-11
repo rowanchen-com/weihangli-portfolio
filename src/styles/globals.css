@@ -44,10 +44,6 @@
   --font-figtree: var(--font-figtree);
   --color-scroll-top-surface: #bfbfb1;
   --color-scroll-top-foreground: #524d47;
-  --z-nav-backdrop: 997;
-  --z-nav-panel: 998;
-  --z-nav-toggle: 999;
-  --z-page-intro: 9998;
 }
 
   :root {

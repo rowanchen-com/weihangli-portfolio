@@ -7,12 +7,9 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { useLenis } from "lenis/react";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { useScrollTo } from "@/hooks/useScrollTo";
-
-const today = new Date();
-const MONTH_ABBR = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const todayLabel = `${MONTH_ABBR[today.getMonth()]}'${String(today.getDate()).padStart(2, '0')}`;
 
 const WIPE_EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -43,22 +40,22 @@ function CtaButton({ label, onClick, className }: { label: string; onClick: () =
   );
 }
 
-const HERO_COPY = {
-  nameFirst: "WEIHANG",
-  nameLast: "LI",
-  tagline:
-    "I build fast, modern digital products that drive business growth, available for freelance projects worldwide.",
-  cta: "Contact",
-  imageAlt: "Profile photo",
-  availabilityMobile: { line1: "Available For", line2: "Work" },
-  availabilityDesktop: "Available For Work",
-} as const;
-
 export default function HeroSection() {
+  const t = useTranslations("Hero");
+  const locale = useLocale();
   const scrollTo = useScrollTo();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 用 Lenis 的浮点滚动值直接驱动，避免 window.scrollY 整数取整导致的惯性抖动
+  const todayLabel = useMemo(() => {
+    const d = new Date();
+    const loc =
+      locale === "zh-TW" ? "zh-TW" : locale === "zh-CN" ? "zh-CN" : "en-US";
+    return new Intl.DateTimeFormat(loc, {
+      month: "short",
+      day: "2-digit",
+    }).format(d);
+  }, [locale]);
+
   const scrollProgress = useMotionValue(0);
 
   useLenis(({ scroll }) => {
@@ -84,7 +81,6 @@ export default function HeroSection() {
           <div className="flex-1 min-h-[60px]" />
 
           <div className="flex flex-col">
-            {/* 标题 — index 0 */}
             <motion.h1
               className="text-7xl font-semibold tracking-tighter uppercase md:text-[17.5vw] md:leading-[0.7] whitespace-nowrap flex justify-between text-foreground/95 scale-y-[0.88]"
               variants={HERO_VARIANTS}
@@ -92,15 +88,13 @@ export default function HeroSection() {
               animate="visible"
               custom={0}
             >
-              {HERO_COPY.nameFirst}
+              WEIHANG
               <br className="md:hidden" />
               <span className="hidden md:inline"> </span>
-              {HERO_COPY.nameLast}
+              LI
             </motion.h1>
 
-            {/* ===== 移动端布局 ===== */}
             <div className="relative grid grid-cols-12 gap-x-4 gap-y-6 md:hidden">
-              {/* 描述 + CTA — index 1 */}
               <motion.div
                 className="col-span-12 space-y-4 mt-4"
                 variants={HERO_VARIANTS}
@@ -108,17 +102,16 @@ export default function HeroSection() {
                 animate="visible"
                 custom={1}
               >
-                <p className="text-base max-w-[260px] text-balance text-foreground/60 font-medium">{HERO_COPY.tagline}</p>
+                <p className="text-base max-w-[260px] text-balance text-foreground/60 font-medium">{t("tagline")}</p>
                 <div>
                   <CtaButton
-                    label={HERO_COPY.cta}
+                    label={t("cta")}
                     onClick={() => scrollTo("contact")}
                     className="gap-2 px-5 py-4 rounded-full text-sm"
                   />
                 </div>
               </motion.div>
 
-              {/* 封面图片 — index 3 */}
               <motion.div
                 className="col-span-4 overflow-hidden rounded-sm max-w-[300px]"
                 variants={HERO_IMAGE_VARIANTS}
@@ -128,14 +121,13 @@ export default function HeroSection() {
               >
                 <Image
                   src={coverImage}
-                  alt={HERO_COPY.imageAlt}
+                  alt={t("imageAlt")}
                   width={144}
                   height={144}
                   className="w-full h-full object-cover grayscale"
                 />
               </motion.div>
 
-              {/* 右侧日期信息 — index 4 */}
               <motion.div
                 className="col-span-8 flex items-end justify-end"
                 variants={HERO_VARIANTS}
@@ -145,10 +137,10 @@ export default function HeroSection() {
               >
                 <div className="text-right">
                   <p className="text-base uppercase text-muted-foreground leading-tight font-mono">
-                    {HERO_COPY.availabilityMobile.line1}
+                    {t("availabilityMobileLine1")}
                   </p>
                   <p className="text-base uppercase text-muted-foreground leading-tight font-mono">
-                    {HERO_COPY.availabilityMobile.line2}
+                    {t("availabilityMobileLine2")}
                   </p>
                   <p className="text-4xl font-semibold uppercase leading-none tracking-tight mt-1 text-foreground/80">
                     {todayLabel}
@@ -157,9 +149,7 @@ export default function HeroSection() {
               </motion.div>
             </div>
 
-            {/* ===== 桌面端布局 ===== */}
             <div className="hidden md:grid md:grid-cols-12 gap-x-6 mt-8">
-              {/* 左侧：箭头 + 描述 + CTA — index 1 */}
               <motion.div
                 className="col-span-4 flex flex-col justify-between"
                 variants={HERO_VARIANTS}
@@ -171,11 +161,11 @@ export default function HeroSection() {
                   <ArrowDownRight className="text-muted-foreground size-12" />
                   <div className="flex flex-col gap-8 pl-3">
                     <p className="text-2xl xl:text-3xl tracking-tight leading-[1.4] max-w-[32ch] text-balance text-foreground/60 font-medium">
-                      {HERO_COPY.tagline}
+                      {t("tagline")}
                     </p>
                     <div>
                       <CtaButton
-                        label={HERO_COPY.cta}
+                        label={t("cta")}
                         onClick={() => scrollTo("contact")}
                         className="tracking-tight px-4 py-3 text-xs md:px-6 md:py-4 md:text-base lg:px-8 lg:py-5 lg:text-lg rounded-full"
                       />
@@ -184,7 +174,6 @@ export default function HeroSection() {
                 </div>
               </motion.div>
 
-              {/* 中间：封面图片 — index 3 */}
               <div className="col-span-4 flex justify-center">
                 <motion.div
                   className="h-[50vh] max-w-lg overflow-hidden rounded-sm w-fit"
@@ -195,13 +184,12 @@ export default function HeroSection() {
                 >
                   <Image
                     src={coverImage}
-                    alt={HERO_COPY.imageAlt}
+                    alt={t("imageAlt")}
                     className="h-full w-full object-cover object-center"
                   />
                 </motion.div>
               </div>
 
-              {/* 右侧：日期信息 — index 4 */}
               <motion.div
                 className="col-span-4 flex flex-col justify-end items-end"
                 variants={HERO_VARIANTS}
@@ -211,7 +199,7 @@ export default function HeroSection() {
               >
                 <div className="text-right">
                   <p className="text-sm xl:text-base uppercase text-muted-foreground leading-tight tracking-wider font-mono">
-                    {HERO_COPY.availabilityDesktop}
+                    {t("availabilityDesktop")}
                   </p>
                   <p className="text-[8vw] text-foreground/80 font-semibold uppercase leading-none tracking-tighter mt-1">
                     {todayLabel}

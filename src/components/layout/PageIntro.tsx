@@ -25,7 +25,8 @@ export default function PageIntro() {
   return (
     <motion.div
       ref={scope}
-      className="fixed inset-0 z-page-intro bg-secondary pointer-events-none"
+      className="fixed inset-0 bg-secondary pointer-events-none"
+      style={{ zIndex: 9998 }}
     />
   );
 }

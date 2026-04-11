@@ -1,0 +1,145 @@
+{
+  "Metadata": {
+    "title": "李偉航 - 全端開發者",
+    "description": "李偉航 - 全端開發者"
+  },
+  "Nav": {
+    "home": "首頁",
+    "services": "服務",
+    "works": "作品",
+    "about": "關於",
+    "contact": "聯絡"
+  },
+  "Header": {
+    "roleMobile1": "全端",
+    "roleMobile2": "開發者",
+    "roleDesktop": "全端開發者"
+  },
+  "NavOverlay": {
+    "emailLabel": "電子郵件",
+    "copyEmail": "複製郵件",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單",
+    "github": "Github"
+  },
+  "Hero": {
+    "tagline": "我致力於打造高效能、現代化的軟體。作為全端開發者，我為全球客戶提供開發服務",
+    "cta": "聯絡我",
+    "imageAlt": "個人照片",
+    "availabilityMobileLine1": "我在",
+    "availabilityMobileLine2": "空閒中",
+    "availabilityDesktop": "我在空閒中"
+  },
+  "WhatIDo": {
+    "heading": "我能做什麼 /",
+    "label": "（提供服務）",
+    "intro": "我專注於建構高效能、穩定且易用的全端應用，將複雜的想法落地為可上線的產品，幫助業務實現持續成長。",
+    "services": [
+      {
+        "number": "01",
+        "title": "全端",
+        "description": "我提供從直覺的前端體驗到穩定的後端架構的完整開發服務，並使用現代技術堆疊建構可擴充、可上線的應用。",
+        "skills": [
+          "React、Vue、Tailwind CSS",
+          "Node.js、Spring Boot",
+          "Git、Docker、Vercel、阿里雲"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "效能與最佳化",
+        "description": "我建構可靠且可擴充的系統，基於扎實的工程原則，讓應用保持快速、穩定，並具備長期迭代的可擴充性。",
+        "skills": [
+          "資料結構與演算法",
+          "資料庫、物件導向、作業系統基礎",
+          "可擴充系統與資料管道"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "AI 輔助",
+        "description": "在 AI 時代下，我使用各種 AI 工具加速開發，同時堅持高品質的工程標準——從快速原型到結構清晰、可擴充的系統。",
+        "skills": [
+          "Cursor、Codex、Claude",
+          "快速原型與迭代",
+          "程式碼品質與審查"
+        ]
+      }
+    ]
+  },
+  "Works": {
+    "heading": "精選作品 /",
+    "label": "（專案）",
+    "intro": "致力於打造兼具實用與美感的產品體驗，讓產品流暢、易用且富有質感。",
+    "projects": [
+      {
+        "category": "現代作品集網站",
+        "title": "My Profolio",
+        "year": "2026",
+        "tags": ["Next.js", "Framer Motion"]
+      },
+      {
+        "category": "SaaS 平台",
+        "title": "Hynel Energy",
+        "year": "2025",
+        "tags": ["Vue", "全端", "儀表板"]
+      },
+      {
+        "category": "桌面應用",
+        "title": "Vehicle Search Script",
+        "year": "2025",
+        "tags": ["Electron", "工具鏈"]
+      }
+    ]
+  },
+  "About": {
+    "line1": "開發者",
+    "line2": "設計師",
+    "line3": "創造者/",
+    "skillsHeading": "技術",
+    "skillGroups": [
+      { "title": "語言" },
+      { "title": "框架與庫" },
+      { "title": "工具與資料庫" }
+    ],
+    "aboutImageAlt": "關於配圖",
+    "lead": "我是全端開發者與設計師，專注打造高效能數位產品，在複雜業務邏輯與流暢使用者體驗之間找到平衡。",
+    "aboutLabel": "（關於我）",
+    "p1": "從 React、Node.js 到 Spring Boot 和 Python，我使用多樣化技術堆疊建構可擴充、穩定且具備高負載能力的應用。無論是 Web、行動端還是桌面端，我都致力於為新創團隊與企業提供完整的端到端解決方案。",
+    "p2": "我相信微互動與細節動效能夠顯著提升產品體驗。我的工作方式很直接：以工程保證可靠性，以設計提升體驗，並在細節上持續打磨，讓產品從「可用」走向「好用」。"
+  },
+  "Contact": {
+    "heading": "一起把想法落地",
+    "subheading": "有專案想聊聊？"
+  },
+  "Form": {
+    "namePlaceholder": "您的姓名",
+    "emailPlaceholder": "您的電子郵件",
+    "messagePlaceholder": "簡要描述您的業務或專案",
+    "nameRequired": "請輸入姓名",
+    "emailRequired": "請輸入電子郵件",
+    "emailInvalid": "請輸入有效的電子郵件地址",
+    "messageRequired": "請描述您的專案",
+    "submitSending": "傳送中…",
+    "submitIdle": "聯絡我！",
+    "successTitle": "收到！我會盡快回覆您。",
+    "successAgain": "再傳一則",
+    "errorTitle": "發生錯誤，請再試一次。",
+    "errorBack": "返回"
+  },
+  "Footer": {
+    "menu": "選單",
+    "socials": "社媒",
+    "wechat": "微信",
+    "wechatQrAlt": "微信 QR Code",
+    "github": "Github",
+    "localTime": "本地時間",
+    "scrollToTop": "回到頂部"
+  },
+  "LocaleSwitcher": {
+    "label": "語言",
+    "en": "English",
+    "zhCN": "简体中文",
+    "zhTW": "繁體中文"
+  }
+}

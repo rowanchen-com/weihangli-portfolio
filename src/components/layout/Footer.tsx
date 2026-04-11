@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 import { motion } from "motion/react";
+import { useLocale, useTranslations } from "next-intl";
 import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
 import {
   Popover,
@@ -12,44 +13,45 @@ import {
 } from "@/components/ui/popover";
 import { RollingText } from "@/components/ui/RollingText";
 
-const menuLinks: { label: string; id: SectionId }[] = [
-  { label: "Home", id: "home" },
-  { label: "Services", id: "services" },
-  { label: "Works", id: "works" },
-  { label: "About", id: "about" },
-  { label: "Contact", id: "contact" },
-];
+const MENU_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
-const socialLinks = [
-  // { label: "Linkedin", href: "https://www.linkedin.com/in/liweihang/" },
-  { label: "Github", href: "https://github.com/hanggesimida" },
-  { label: "WeChat" },
+type SocialItem =
+  | { kind: "link"; id: "github"; href: string }
+  | { kind: "wechat"; id: "wechat" };
+
+const socialItems: SocialItem[] = [
+  { kind: "link", id: "github", href: "https://github.com/hanggesimida" },
+  { kind: "wechat", id: "wechat" },
 ];
 
 function LocalClock() {
+  const locale = useLocale();
   const [time, setTime] = useState("");
 
   useEffect(() => {
     const update = () => {
       setTime(
-        new Date().toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-          timeZoneName: "short",
-        })
+        new Date().toLocaleTimeString(
+          locale === "en" ? "en-US" : locale === "zh-TW" ? "zh-TW" : "zh-CN",
+          {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+            timeZoneName: "short",
+          },
+        ),
       );
     };
     update();
     const id = setInterval(update, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [locale]);
 
   return <span className="font-mono font-medium uppercase text-secondary/60 text-base">{time}</span>;
 }
 
-function WeChatItem() {
+function WeChatItem({ label, qrAlt }: { label: string; qrAlt: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -61,7 +63,7 @@ function WeChatItem() {
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
         >
-          <RollingText className="text-base sm:text-lg lg:text-xl">WeChat</RollingText>
+          <RollingText className="text-base sm:text-lg lg:text-xl">{label}</RollingText>
         </button>
       </PopoverTrigger>
       <PopoverContent
@@ -73,7 +75,7 @@ function WeChatItem() {
       >
         <Image
           src="/images/footer/wechat.webp"
-          alt="WeChat QR Code"
+          alt={qrAlt}
           width={160}
           height={160}
           className="rounded-md"
@@ -83,12 +85,19 @@ function WeChatItem() {
   );
 }
 
-function ScrollToTopButton({ onClick }: { onClick: () => void }) {
+function ScrollToTopButton({
+  onClick,
+  ariaLabel,
+}: {
+  onClick: () => void;
+  ariaLabel: string;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <button
-      aria-label="Scroll to top"
+      type="button"
+      aria-label={ariaLabel}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -109,74 +118,74 @@ function ScrollToTopButton({ onClick }: { onClick: () => void }) {
 }
 
 export default function Footer() {
+  const t = useTranslations("Nav");
+  const tFooter = useTranslations("Footer");
   const scrollTo = useScrollTo();
 
   return (
     <footer className="px-10 py-12 flex flex-col gap-12">
-      {/* Top row: Menu + Socials */}
       <div className="grid grid-cols-2 gap-y-10 md:grid-cols-12 gap-x-8">
-        {/* Menu */}
         <div className="flex flex-col md:col-span-6">
           <h3 className="mb-3 border-b-[1.5px] border-foreground/30 pb-2 font-bold text-lg lg:text-xl tracking-tighter text-secondary/80">
-            Menu
+            {tFooter("menu")}
           </h3>
           <ul className="flex flex-col gap-1.5">
-            {menuLinks.map((link) => (
-              <li key={link.label}>
+            {MENU_IDS.map((id) => (
+              <li key={id}>
                 <button
                   type="button"
-                  onClick={() => scrollTo(link.id)}
+                  onClick={() => scrollTo(id)}
                   className="group text-left text-secondary/60 sm:text-lg lg:text-xl tracking-tighter cursor-pointer hover:text-secondary/80 transition-colors overflow-hidden"
                 >
-                  <RollingText className="text-base sm:text-lg lg:text-xl">{link.label}</RollingText>
+                  <RollingText className="text-base sm:text-lg lg:text-xl">{t(id)}</RollingText>
                 </button>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Socials */}
         <div className="flex flex-col md:col-span-3">
           <h3 className="mb-3 border-b-[1.5px] border-foreground/30 pb-2 font-bold text-lg lg:text-xl tracking-tighter text-secondary/80">
-            Socials
+            {tFooter("socials")}
           </h3>
           <ul className="flex flex-col gap-1.5">
-            {socialLinks.map((link) =>
-              link.label === "WeChat" ? (
-                <li key={link.label}>
-                  <WeChatItem />
+            {socialItems.map((item) =>
+              item.kind === "wechat" ? (
+                <li key={item.id}>
+                  <WeChatItem label={tFooter("wechat")} qrAlt={tFooter("wechatQrAlt")} />
                 </li>
               ) : (
-                <li key={link.label}>
+                <li key={item.id}>
                   <a
-                    href={link.href}
+                    href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group text-secondary/60 tracking-tighter hover:text-secondary/80 transition-colors overflow-hidden"
                   >
-                    <RollingText className="text-base sm:text-lg lg:text-xl">{link.label}</RollingText>
+                    <RollingText className="text-base sm:text-lg lg:text-xl">{tFooter("github")}</RollingText>
                   </a>
                 </li>
-              )
+              ),
             )}
           </ul>
         </div>
       </div>
 
-      {/* Bottom row: name / local time / scroll-to-top */}
       <div className="flex w-full items-end justify-between md:grid md:grid-cols-12 gap-x-8">
-        {/* Name placeholder */}
         <span className="text-4xl font-semibold tracking-tighter text-secondary/80 md:col-span-6 md:text-5xl"></span>
 
-        {/* Local time */}
         <div className="flex flex-col text-sm md:col-span-3">
-          <span className="font-bold uppercase tracking-tighter text-secondary/80 text-base sm:text-lg">Local Time</span>
+          <span className="font-bold uppercase tracking-tighter text-secondary/80 text-base sm:text-lg">
+            {tFooter("localTime")}
+          </span>
           <LocalClock />
         </div>
 
-        {/* Scroll to top */}
         <div className="hidden md:flex md:col-span-3 justify-end">
-          <ScrollToTopButton onClick={() => scrollTo("home")} />
+          <ScrollToTopButton
+            ariaLabel={tFooter("scrollToTop")}
+            onClick={() => scrollTo("home")}
+          />
         </div>
       </div>
     </footer>
