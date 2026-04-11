@@ -63,7 +63,7 @@ export default function WhatIDoSection() {
   return (
     <section id="services" className="px-10 pt-20 md:pt-20 bg-secondary rounded-t-3xl text-secondary-foreground relative z-10">
       <div className="mb-12 md:mb-24">
-        <h2 className="text-6xl md:text-[8vw] font-semibold tracking-tighter uppercase leading-none mb-20">
+        <h2 className="text-[54px] sm:text-[6xl] md:text-[8vw] font-semibold tracking-tighter uppercase leading-none mb-20">
           <SplitText stagger={0.04} duration={0.8} yOffset={50}>
             {t("heading")}
           </SplitText>

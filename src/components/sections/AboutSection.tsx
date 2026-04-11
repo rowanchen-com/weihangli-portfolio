@@ -71,10 +71,10 @@ export default function AboutSection() {
       <div className="relative z-10">
         <motion.div
           style={{ scale, y, willChange: "transform", transformOrigin: "top center" }}
-          className="rounded-b-3xl bg-secondary px-10 pt-20 md:pt-[15vh] pb-20 sm:pb-40 text-secondary-foreground space-y-28 md:space-y-20"
+          className="rounded-b-3xl bg-secondary px-10 pt-4 sm:pt-20 md:pt-[15vh] pb-20 sm:pb-40 text-secondary-foreground space-y-20 md:space-y-20"
         >
           <div className="grid grid-cols-12 gap-x-6 gap-y-12">
-            <h2 className="order-2 col-span-12 flex flex-col lg:pt-24 font-semibold tracking-tighter leading-none md:order-1 lg:col-span-6 text-6xl sm:text-7xl md:text-[88px] lg:text-[96px]">
+            <h2 className="order-2 col-span-12 flex flex-col lg:pt-24 font-semibold tracking-tighter leading-none md:order-1 lg:col-span-6 text-[54px] sm:text-7xl md:text-[88px] lg:text-[96px]">
               <span className="block">
                 <SplitText stagger={0.04} duration={0.8} yOffset={50}>
                   {t("line1")}

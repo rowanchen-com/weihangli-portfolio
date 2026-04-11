@@ -12,7 +12,7 @@ export default function Header() {
   const scrollTo = useScrollTo();
 
   return (
-    <header className="flex flex-col gap-4 md:flex-row md:justify-between md:items-start pt-8">
+    <header className="flex justify-between items-start pt-8">
       <div className="flex flex-wrap items-start justify-between gap-4 md:contents">
         <button
           type="button"
@@ -23,7 +23,6 @@ export default function Header() {
           <p className="md:hidden">{tHeader("roleMobile2")}</p>
           <p className="hidden md:block md:text-lg lg:text-xl">{tHeader("roleDesktop")}</p>
         </button>
-        <LocaleSwitcher className="md:hidden text-sm" />
       </div>
       <nav className="flex flex-col items-end gap-1.5 md:flex-row md:items-center md:gap-4">
         {HEADER_IDS.map((id) => (
