@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Copy, Check } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
 import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
 
@@ -11,6 +11,9 @@ const NAV_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
 const socialLinks = [
   { labelKey: "github" as const, href: "https://github.com/hanggesimida" },
+  { labelKey: "telegram" as const, href: "https://t.me/WeihangLi" },
+  { labelKey: "instagram" as const, href: "https://www.instagram.com/lwphgr/" },
+  { labelKey: "whatsapp" as const, href: "https://wa.me/8613728215486" },
 ];
 
 const EMAIL = "hanggesimida@gmail.com";
@@ -43,9 +46,12 @@ const footerVariants = {
 export default function NavOverlay() {
   const t = useTranslations("Nav");
   const tOverlay = useTranslations("NavOverlay");
+  const locale = useLocale();
+  const isChinese = locale.startsWith("zh");
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [hoveredId, setHoveredId] = useState<SectionId | null>(null);
   const scrollTo = useScrollTo();
 
   const handleCopyEmail = async () => {
@@ -130,24 +136,38 @@ export default function NavOverlay() {
           className="w-full relative flex max-w-2xl flex-col justify-end overflow-hidden xl:max-w-3xl"
         >
           <nav className="relative h-full px-10 sm:px-16 flex items-center">
-            <ul className="flex flex-col justify-center">
-              {NAV_IDS.map((id, i) => (
-                <li key={id} className="relative flex items-center overflow-hidden">
-                  <motion.button
-                    type="button"
-                    custom={i}
-                    variants={linkVariants}
-                    initial="initial"
-                    animate={isOpen ? "enter" : "initial"}
-                    onClick={() => { scrollTo(id); close(); }}
-                    className="group relative inline-block text-secondary-foreground font-bold uppercase leading-none tracking-tighter select-none cursor-pointer"
-                    style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
-                  >
-                    {t(id)}
-                    <span className="absolute left-0 bottom-1 h-0.5 w-0 bg-secondary-foreground transition-all duration-500 group-hover:w-full" />
-                  </motion.button>
-                </li>
-              ))}
+            <ul
+              className="flex flex-col justify-center"
+              onMouseLeave={isChinese ? () => setHoveredId(null) : undefined}
+            >
+              {NAV_IDS.map((id, i) => {
+                const isDimmed = isChinese && hoveredId !== null && hoveredId !== id;
+                return (
+                  <li key={id} className="relative flex items-center overflow-hidden">
+                    <motion.button
+                      type="button"
+                      custom={i}
+                      variants={linkVariants}
+                      initial="initial"
+                      animate={
+                        isChinese
+                          ? { ...(isOpen ? { y: 0, opacity: isDimmed ? 0.25 : 1 } : { y: 20, opacity: 0 }), scale: isDimmed ? 0.9 : 1 }
+                          : isOpen ? "enter" : "initial"
+                      }
+                      transition={{ duration: 0.3, ease: EASE }}
+                      onMouseEnter={isChinese ? () => setHoveredId(id) : undefined}
+                      onClick={() => { scrollTo(id); close(); }}
+                      className="group relative inline-block text-secondary-foreground font-bold uppercase leading-none tracking-tighter select-none cursor-pointer"
+                      style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
+                    >
+                      {t(id)}
+                      {!isChinese && (
+                        <span className="absolute left-0 bottom-1 h-0.5 w-0 bg-secondary-foreground transition-all duration-500 group-hover:w-full" />
+                      )}
+                    </motion.button>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 

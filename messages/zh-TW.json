@@ -20,7 +20,10 @@
     "copyEmail": "複製郵件",
     "openMenu": "開啟選單",
     "closeMenu": "關閉選單",
-    "github": "Github"
+    "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
   },
   "Hero": {
     "tagline": "我致力於打造高效能、現代化的軟體。作為全端開發者，我為全球客戶提供開發服務",
@@ -42,7 +45,7 @@
         "skills": [
           "React、Vue、Tailwind CSS",
           "Node.js、Spring Boot",
-          "Git、Docker、Vercel、阿里雲"
+          "Git、Docker、Vercel、Alibaba Cloud"
         ]
       },
       {
@@ -82,13 +85,13 @@
         "category": "SaaS 平台",
         "title": "Hynel Energy",
         "year": "2025",
-        "tags": ["Vue", "全端", "儀表板"]
+        "tags": ["Vue", "全端"]
       },
       {
         "category": "桌面應用",
         "title": "Vehicle Search Script",
         "year": "2025",
-        "tags": ["Electron", "工具鏈"]
+        "tags": ["Electron", "工具"]
       }
     ]
   },
@@ -133,6 +136,9 @@
     "wechat": "微信",
     "wechatQrAlt": "微信 QR Code",
     "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
     "localTime": "廣東",
     "scrollToTop": "回到頂部"
   },

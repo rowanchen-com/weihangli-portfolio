@@ -16,11 +16,14 @@ import { RollingText } from "@/components/ui/RollingText";
 const MENU_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
 type SocialItem =
-  | { kind: "link"; id: "github"; href: string }
+  | { kind: "link"; id: "github" | "telegram" | "instagram" | "whatsapp"; href: string }
   | { kind: "wechat"; id: "wechat" };
 
 const socialItems: SocialItem[] = [
   { kind: "link", id: "github", href: "https://github.com/hanggesimida" },
+  { kind: "link", id: "telegram", href: "https://t.me/WeihangLi" },
+  { kind: "link", id: "instagram", href: "https://www.instagram.com/lwphgr/" },
+  { kind: "link", id: "whatsapp", href: "https://wa.me/8613728215486" },
   { kind: "wechat", id: "wechat" },
 ];
 
@@ -162,7 +165,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="group text-secondary/60 tracking-tighter hover:text-secondary/80 transition-colors overflow-hidden"
                   >
-                    <RollingText className="text-base sm:text-lg lg:text-xl">{tFooter("github")}</RollingText>
+                    <RollingText className="text-base sm:text-lg lg:text-xl">{tFooter(item.id)}</RollingText>
                   </a>
                 </li>
               ),

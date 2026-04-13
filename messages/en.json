@@ -20,7 +20,10 @@
     "copyEmail": "Copy email",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "github": "Github"
+    "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
   },
   "Hero": {
     "tagline": "I build fast, modern digital products that drive business growth, available for freelance projects worldwide.",
@@ -82,7 +85,7 @@
         "category": "SaaS Platform",
         "title": "Hynel Energy",
         "year": "2025",
-        "tags": ["Vue", "Full-stack", "Dashboard"]
+        "tags": ["Vue", "Full-stack"]
       },
       {
         "category": "Desktop Application",
@@ -133,6 +136,9 @@
     "wechat": "WeChat",
     "wechatQrAlt": "WeChat QR Code",
     "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
     "localTime": "Local Time",
     "scrollToTop": "Scroll to top"
   },

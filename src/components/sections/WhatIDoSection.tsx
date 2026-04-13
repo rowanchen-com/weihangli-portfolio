@@ -94,7 +94,7 @@ export default function WhatIDoSection() {
           return (
             <div
               key={service.number}
-              className="sticky border-t border-secondary-border bg-secondary [--sticky-top:15vh] md:[--sticky-top:20vh] [--sticky-bottom:2em] md:[--sticky-bottom:8em]"
+              className="sticky border-t border-secondary-border bg-secondary [--sticky-top:8vh] sm:[--sticky-top:15vh] md:[--sticky-top:20vh] [--sticky-bottom:2em] md:[--sticky-bottom:8em]"
               style={{
                 top: `calc(var(--sticky-top) + ${topOffsetPx}px)`,
                 marginBottom: `calc(${remainingHeadersPx}px + var(--sticky-bottom))`,

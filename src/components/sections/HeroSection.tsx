@@ -82,7 +82,7 @@ export default function HeroSection() {
 
           <div className="flex flex-col">
             <motion.h1
-              className="text-7xl font-semibold tracking-tighter uppercase md:text-[17.5vw] md:leading-[0.7] whitespace-nowrap flex justify-between text-foreground/95 scale-y-[0.88]"
+              className="text-7xl max-[380px]:text-[70px] font-semibold tracking-tighter uppercase md:text-[17.5vw] md:leading-[0.7] whitespace-nowrap flex justify-between text-foreground/95 scale-y-[0.88]"
               variants={HERO_VARIANTS}
               initial="hidden"
               animate="visible"
@@ -107,7 +107,7 @@ export default function HeroSection() {
                   <CtaButton
                     label={t("cta")}
                     onClick={() => scrollTo("contact")}
-                    className="gap-2 px-5 py-4 rounded-full text-sm"
+                    className="px-5 py-4 rounded-full text-sm"
                   />
                 </div>
               </motion.div>

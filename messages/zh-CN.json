@@ -20,7 +20,10 @@
     "copyEmail": "复制邮箱",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
-    "github": "Github"
+    "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
   },
   "Hero": {
     "tagline": "我致力于打造高性能、现代化的软件。作为全栈开发者，我为全球客户提供开发服务",
@@ -82,13 +85,13 @@
         "category": "SaaS 平台",
         "title": "Hynel Energy",
         "year": "2025",
-        "tags": ["Vue", "全栈", "仪表板"]
+        "tags": ["Vue", "全栈"]
       },
       {
         "category": "桌面应用",
         "title": "Vehicle Search Script",
         "year": "2025",
-        "tags": ["Electron", "工具链"]
+        "tags": ["Electron", "工具"]
       }
     ]
   },
@@ -133,6 +136,9 @@
     "wechat": "微信",
     "wechatQrAlt": "微信二维码",
     "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
     "localTime": "广东",
     "scrollToTop": "回到顶部"
   },

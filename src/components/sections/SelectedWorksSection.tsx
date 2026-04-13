@@ -103,7 +103,7 @@ export default function SelectedWorksSection() {
   }, [merged.length]);
 
   return (
-    <section id="works" className="space-y-12 bg-secondary px-10 py-20 text-secondary-foreground">
+    <section id="works" className="space-y-12 bg-secondary px-10 pt-10 pb-20 sm:py-20 text-secondary-foreground">
       <div>
         <SplitText stagger={0.04} duration={0.8} yOffset={50} className="mb-20 text-6xl leading-none font-semibold tracking-tighter uppercase md:text-[7vw]">
           {t("heading")}

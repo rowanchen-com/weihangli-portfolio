@@ -1,11 +1,10 @@
 import "@/styles/globals.css";
 import NavOverlay from "@/components/layout/NavOverlay";
-import PageIntro from "@/components/layout/PageIntro";
 import SmoothScrolling from "@/components/scroll/SmoothScrolling";
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Figtree, Noto_Sans_SC, Noto_Sans_TC } from "next/font/google";
+import { Figtree } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -17,24 +16,12 @@ const figtree = Figtree({
   variable: "--font-figtree",
 });
 
-const notoSansSc = Noto_Sans_SC({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-noto-sc",
-});
-
-const notoSansTc = Noto_Sans_TC({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-noto-tc",
-});
-
+// 构建时（Build Time）告诉 Next.js：“我有 en, zh-CN, zh-TW 这几种语言，请把它们全部预渲染成静态 HTML”。
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// 根据当前的 locale，它去翻译文件的 Metadata 命名空间下寻找 title 和 description，让搜索引擎在不同语言下看到不同的网页标题。
 export async function generateMetadata({
   params,
 }: {
@@ -64,12 +51,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   // 2. 这里的 htmlClass 负责把所有的字体变量注入 DOM
-  const htmlClass = `${figtree.variable} ${notoSansSc.variable} ${notoSansTc.variable}`;
+  const htmlClass = `${figtree.variable}`;
 
-  // 3. 构建字体栈：Figtree 永远在前（处理英文），中文字体在后
+  // 3. 构建字体栈
   const getFontStack = () => {
-    if (locale === "zh-CN") return `${figtree.className} ${notoSansSc.className}`;
-    if (locale === "zh-TW") return `${figtree.className} ${notoSansTc.className}`;
     return figtree.className;
   };
 
@@ -77,7 +62,6 @@ export default async function LocaleLayout({
     <html lang={locale} className={htmlClass} suppressHydrationWarning>
       <body className={getFontStack()}>
         <NextIntlClientProvider messages={messages}>
-          <PageIntro />
           <NavOverlay />
           <SmoothScrolling>{children}</SmoothScrolling>
         </NextIntlClientProvider>

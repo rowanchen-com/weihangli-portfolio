@@ -24,7 +24,7 @@ export default function Header() {
           <p className="hidden md:block md:text-lg lg:text-xl">{tHeader("roleDesktop")}</p>
         </button>
       </div>
-      <nav className="flex flex-col items-end gap-1.5 md:flex-row md:items-center md:gap-4">
+      <nav className="flex flex-col items-end gap-1 md:flex-row md:items-center md:gap-4">
         {HEADER_IDS.map((id) => (
           <button
             key={id}
