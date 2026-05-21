@@ -78,7 +78,7 @@ export default function HeroSection() {
           className="flex-1 flex flex-col"
           style={{ y, opacity, scale, willChange: "transform", backfaceVisibility: "hidden" }}
         >
-          <div className="flex-1 min-h-[60px]" />
+          <div className="flex-1 min-h-[30px]" />
 
           <div className="flex flex-col">
             <motion.h1

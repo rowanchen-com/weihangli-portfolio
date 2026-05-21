@@ -50,7 +50,7 @@ export const FormField = forwardRef<
         )}
         <p
           className={clsx(
-            "text-red-400 text-sm mt-1 h-4 transition-all duration-300",
+            "text-red-400 text-sm mt-0.5 sm:mt-1 h-3 sm:h-4 transition-all duration-300",
             error ? "opacity-100" : "opacity-0",
           )}
         >

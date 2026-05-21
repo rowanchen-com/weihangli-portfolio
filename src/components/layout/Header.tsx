@@ -12,7 +12,7 @@ export default function Header() {
   const scrollTo = useScrollTo();
 
   return (
-    <header className="flex justify-between items-start pt-8">
+    <header className="flex justify-between items-start pt-4 sm:pt-8">
       <div className="flex flex-wrap items-start justify-between gap-4 md:contents">
         <button
           type="button"

@@ -56,7 +56,7 @@ export default function ContactForm() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
         className={clsx(
-          "space-y-2 sm:space-y-4 transition-opacity duration-300",
+          "space-y-1 sm:space-y-4 transition-opacity duration-300",
           status === "success" || status === "error"
             ? "opacity-0 pointer-events-none"
             : "opacity-100",

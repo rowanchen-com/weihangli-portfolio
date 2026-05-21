@@ -24,19 +24,20 @@ A single-page portfolio site for **Weihang Li** (Full Stack Developer), built wi
 ## Prerequisites
 
 - **Node.js** — use a current **LTS** release (recommended for Next.js 16).
+- **pnpm** — recommended package manager. Install via `npm install -g pnpm` or see [pnpm.io](https://pnpm.io/installation).
 
 ## Getting started
 
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Run the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser. Edit files under `src/`; the app hot-reloads during development.
@@ -45,10 +46,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. Edit files 
 
 | Command        | Description              |
 | -------------- | ------------------------ |
-| `npm run dev`  | Start dev server         |
-| `npm run build` | Production build        |
-| `npm run start` | Run production server   |
-| `npm run lint`  | Run ESLint              |
+| `pnpm dev`     | Start dev server         |
+| `pnpm build`   | Production build         |
+| `pnpm start`   | Run production server    |
+| `pnpm lint`    | Run ESLint               |
 
 ## Environment variables
 

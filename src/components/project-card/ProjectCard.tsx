@@ -64,7 +64,6 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(({
                 {/* 左侧标题区 */}
                 <div className="flex flex-col gap-y-2">
                     <DecryptedText
-                        once={false}
                         stagger={48}
                         duration={330}
                         scrambleSpeed={34}
@@ -73,7 +72,6 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(({
                         {category}
                     </DecryptedText>
                     <DecryptedText
-                        once={false}
                         stagger={48}
                         duration={330}
                         scrambleSpeed={34}
