@@ -83,6 +83,12 @@
       },
       {
         "category": "SaaS Platform",
+        "title": "Jinwen Peripherals",
+        "year": "2026",
+        "tags": ["Next.js", "Nest"]
+      },
+      {
+        "category": "SaaS Platform",
         "title": "Hynel Energy",
         "year": "2025",
         "tags": ["Vue", "Full-stack"]

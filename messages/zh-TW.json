@@ -83,6 +83,12 @@
       },
       {
         "category": "SaaS 平台",
+        "title": "燼紋外設",
+        "year": "2026",
+        "tags": ["Next.js", "Nest"]
+      },
+      {
+        "category": "SaaS 平台",
         "title": "Hynel Energy",
         "year": "2025",
         "tags": ["Vue", "全端"]

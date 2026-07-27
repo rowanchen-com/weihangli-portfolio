@@ -13,6 +13,10 @@ const PROJECT_ASSETS = [
     previewImage: "/images/projects/works_profolio.jpg",
   },
   {
+    bgImage: "/images/projects/works_bg_04.webp",
+    previewImage: "/images/projects/works_jinwen.png",
+  },
+  {
     bgImage: "/images/projects/works_bg_02.webp",
     previewImage: "/images/projects/works_hynel.jpg",
   },

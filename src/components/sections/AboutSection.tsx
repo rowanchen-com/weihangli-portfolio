@@ -123,7 +123,7 @@ export default function AboutSection() {
           </div>
 
           <div className="grid grid-cols-12 gap-x-6 gap-y-10">
-            <div className="pointer-events-none relative max-h-[30rem] col-span-12 md:col-span-3 flex aspect-square w-full h-full items-center overflow-clip rounded-md sm:aspect-auto md:items-end">
+            <div className="pointer-events-none relative col-span-12 aspect-[4/5] w-full self-start overflow-clip rounded-md md:col-span-3">
               <Image
                 src="/images/about/me.webp"
                 alt={t("aboutImageAlt")}
