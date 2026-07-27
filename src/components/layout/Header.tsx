@@ -1,10 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
+import { HEADER_SECTION_IDS } from "@/components/scroll/config";
+import { useScrollTo } from "@/hooks/useScrollTo";
 import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
-
-const HEADER_IDS: SectionId[] = ["services", "works", "about", "contact"];
 
 export default function Header() {
   const t = useTranslations("Nav");
@@ -25,7 +24,7 @@ export default function Header() {
         </button>
       </div>
       <nav className="flex flex-col items-end gap-1 md:flex-row md:items-center md:gap-4">
-        {HEADER_IDS.map((id) => (
+        {HEADER_SECTION_IDS.map((id) => (
           <button
             key={id}
             type="button"

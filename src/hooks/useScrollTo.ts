@@ -1,22 +1,29 @@
 "use client";
 
+import {
+  SCROLL_DURATION,
+  type SectionId,
+} from "@/components/scroll/config";
 import { useLenis } from "lenis/react";
 
-export type SectionId = "home" | "services" | "works" | "about" | "contact";
+export type { SectionId };
 
 export function useScrollTo() {
   const lenis = useLenis();
 
-  return (sectionId: SectionId | string) => {
+  return (sectionId: SectionId) => {
     const target = sectionId === "home" ? 0 : `#${sectionId}`;
+
     if (lenis) {
-      lenis.scrollTo(target as string | number, { duration: 1.2 });
-    } else {
-      if (sectionId === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-      }
+      lenis.scrollTo(target, { duration: SCROLL_DURATION });
+      return;
     }
+
+    if (sectionId === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   };
 }

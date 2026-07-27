@@ -1,40 +1,36 @@
 "use client";
 
+import {
+  LENIS_OPTIONS,
+  LENIS_REDUCED_MOTION_OPTIONS,
+} from "@/components/scroll/config";
 import { ReactLenis, type LenisRef } from "lenis/react";
-import { frame, cancelFrame } from "motion"; // 或者 "motion"，取决于你的安装
-import { ReactNode, useEffect, useRef } from "react";
+import { cancelFrame, frame, useReducedMotion } from "motion/react";
+import { type ReactNode, useEffect, useRef } from "react";
 
-function SmoothScrolling({ children }: { children: ReactNode }) {
-    // 1. 使用更好的类型定义
-    const lenisRef = useRef<LenisRef>(null);
+export default function SmoothScrolling({ children }: { children: ReactNode }) {
+  const lenisRef = useRef<LenisRef>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-    useEffect(() => {
-        function update(data: { timestamp: number }) {
-            lenisRef.current?.lenis?.raf(data.timestamp);
-        }
+  useEffect(() => {
+    function update(data: { timestamp: number }) {
+      lenisRef.current?.lenis?.raf(data.timestamp);
+    }
 
-        // 使用 frame.read 而非 frame.update，确保 Lenis 在 Motion 读取滚动值之前完成更新
-        frame.read(update, true);
+    // Lenis must update before Motion reads scroll values.
+    frame.read(update, true);
+    return () => cancelFrame(update);
+  }, []);
 
-        return () => {
-            cancelFrame(update);
-        };
-    }, []);
-
-    return (
-        <ReactLenis
-            root
-            ref={lenisRef}
-            options={{
-                lerp: 0.1,
-                duration: 1.2,
-                smoothWheel: true,
-                autoRaf: false,
-            }}
-        >
-            {children}
-        </ReactLenis>
-    );
+  return (
+    <ReactLenis
+      root
+      ref={lenisRef}
+      options={
+        prefersReducedMotion ? LENIS_REDUCED_MOTION_OPTIONS : LENIS_OPTIONS
+      }
+    >
+      {children}
+    </ReactLenis>
+  );
 }
-
-export default SmoothScrolling;

@@ -5,15 +5,14 @@ import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
+import { SECTION_IDS } from "@/components/scroll/config";
+import { useScrollTo } from "@/hooks/useScrollTo";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { RollingText } from "@/components/ui/RollingText";
-
-const MENU_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
 type SocialItem =
   | { kind: "link"; id: "github" | "telegram" | "instagram" | "whatsapp"; href: string }
@@ -133,7 +132,7 @@ export default function Footer() {
             {tFooter("menu")}
           </h3>
           <ul className="flex flex-col gap-1.5">
-            {MENU_IDS.map((id) => (
+            {SECTION_IDS.map((id) => (
               <li key={id}>
                 <button
                   type="button"

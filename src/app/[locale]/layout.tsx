@@ -62,8 +62,10 @@ export default async function LocaleLayout({
     <html lang={locale} className={htmlClass} suppressHydrationWarning>
       <body className={getFontStack()}>
         <NextIntlClientProvider messages={messages}>
-          <NavOverlay />
-          <SmoothScrolling>{children}</SmoothScrolling>
+          <SmoothScrolling>
+            <NavOverlay />
+            {children}
+          </SmoothScrolling>
         </NextIntlClientProvider>
       </body>
     </html>

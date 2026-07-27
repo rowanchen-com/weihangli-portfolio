@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Copy, Check } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { useScrollTo, type SectionId } from "@/hooks/useScrollTo";
+import { useLenis } from "lenis/react";
+import { SECTION_IDS, type SectionId } from "@/components/scroll/config";
+import { useLenisLock } from "@/hooks/useLenisLock";
+import { useScrollTo } from "@/hooks/useScrollTo";
 import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
-
-const NAV_IDS: SectionId[] = ["home", "services", "works", "about", "contact"];
 
 const socialLinks = [
   { labelKey: "github" as const, href: "https://github.com/hanggesimida" },
@@ -54,27 +55,18 @@ export default function NavOverlay() {
   const [hoveredId, setHoveredId] = useState<SectionId | null>(null);
   const scrollTo = useScrollTo();
 
+  useLenisLock(isOpen);
+
+  useLenis(({ scroll }) => {
+    const next = scroll >= window.innerHeight * 0.8;
+    setShowButton((prev) => (prev === next ? prev : next));
+  });
+
   const handleCopyEmail = async () => {
     await navigator.clipboard.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  useEffect(() => {
-    const onScroll = () => {
-      setShowButton(window.scrollY >= window.innerHeight * 0.8);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
 
   const close = () => setIsOpen(false);
 
@@ -117,7 +109,7 @@ export default function NavOverlay() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             aria-hidden="true"
-            className="fixed inset-0 backdrop-blur-lg"
+            className="fixed inset-0 bg-black/50 backdrop-blur-lg"
             style={{ zIndex: 997 }}
           />
         )}
@@ -140,7 +132,7 @@ export default function NavOverlay() {
               className="flex flex-col justify-center"
               onMouseLeave={isChinese ? () => setHoveredId(null) : undefined}
             >
-              {NAV_IDS.map((id, i) => {
+              {SECTION_IDS.map((id, i) => {
                 const isDimmed = isChinese && hoveredId !== null && hoveredId !== id;
                 return (
                   <li key={id} className="relative flex items-center overflow-hidden">
