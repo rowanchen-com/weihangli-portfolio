@@ -1,63 +1,43 @@
+"use client";
+
 import { motion } from "motion/react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type Ref } from "react";
 import clsx from "clsx";
 
 type CounterProps = {
-  value?: number;          // 外部传入值（受控）
-  autoPlay?: boolean;      // 是否自动播放
-  interval?: number;       // 自动播放间隔
-  duration?: number;       // 数字滚动动画时长
-  digits?: number;         // 位数
-  max?: number;            // 最大值（循环）
-  className?: string;      // 容器样式
-  digitClassName?: string; // 单个数字样式
+  value: number;
+  duration?: number;
+  digits?: number;
+  className?: string;
+  digitClassName?: string;
 };
 
-const Digit = ({
+function Digit({
   value,
+  height,
   duration,
   digitClassName,
+  measureRef,
 }: {
   value: number;
+  height: number;
   duration: number;
   digitClassName?: string;
-}) => {
-  const [height, setHeight] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const firstDigitRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const updateHeight = () => {
-      if (firstDigitRef.current) {
-        // 获取精确的浮点高度
-        const h = firstDigitRef.current.getBoundingClientRect().height;
-        setHeight(h);
-      }
-    };
-
-    updateHeight();
-    // 应对窗口大小变化（尤其是你用了 vw 单位）
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, []);
-
+  measureRef?: Ref<HTMLDivElement>;
+}) {
   return (
     <div
       className={clsx("overflow-hidden leading-[0.8]", digitClassName)}
       style={{ height: height || "auto" }}
     >
       <motion.div
-        animate={{ y: -value * height }}
-        transition={{
-          type: "tween",
-          duration,
-          ease: "easeInOut", // 或 "linear" / "easeOut"
-        }}
+        animate={{ y: height ? -value * height : 0 }}
+        transition={{ type: "tween", duration, ease: "easeInOut" }}
       >
-        {Array.from({ length: 10 }).map((_, n) => (
+        {Array.from({ length: 10 }, (_, n) => (
           <div
             key={n}
-            ref={n === 0 ? firstDigitRef : null}
+            ref={n === 0 ? measureRef : undefined}
             className="flex items-center justify-center"
           >
             {n}
@@ -66,50 +46,44 @@ const Digit = ({
       </motion.div>
     </div>
   );
-};
+}
 
 export default function Counter({
   value,
-  autoPlay = true,
-  interval = 1000,
   duration = 0.8,
   digits = 2,
-  max = 10 ** digits,
   className,
   digitClassName,
 }: CounterProps) {
-  const [internal, setInternal] = useState(0);
+  const [height, setHeight] = useState(0);
+  const measureRef = useRef<HTMLDivElement>(null);
 
-  // 自动播放逻辑
-  useEffect(() => {
-    if (!autoPlay) return;
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (!measureRef.current) return;
+      setHeight(measureRef.current.getBoundingClientRect().height);
+    };
 
-    const timer = setInterval(() => {
-      setInternal((c) => (c + 1) % max);
-    }, interval);
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [digitClassName]);
 
-    return () => clearInterval(timer);
-  }, [autoPlay, interval, max]);
-
-  // 优先使用外部 value
-  const displayValue = value ?? internal;
-
-  const digitList = String(displayValue)
+  const digitList = String(value)
     .padStart(digits, "0")
     .slice(-digits)
     .split("");
 
   return (
-    <div
-      className={className}
-      style={{ display: "flex" }}
-    >
+    <div className={clsx("flex", className)}>
       {digitList.map((d, i) => (
         <Digit
           key={i}
           value={Number(d)}
+          height={height}
           duration={duration}
           digitClassName={digitClassName}
+          measureRef={i === 0 ? measureRef : undefined}
         />
       ))}
     </div>
