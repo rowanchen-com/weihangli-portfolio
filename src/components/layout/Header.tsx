@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { HEADER_SECTION_IDS } from "@/components/scroll/config";
 import { useScrollTo } from "@/hooks/useScrollTo";
-import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
 
 export default function Header() {
   const t = useTranslations("Nav");
@@ -34,7 +33,6 @@ export default function Header() {
             {t(id)}
           </button>
         ))}
-        <LocaleSwitcher className="hidden md:block text-sm ml-2" />
       </nav>
     </header>
   );

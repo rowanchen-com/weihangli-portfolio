@@ -2,6 +2,7 @@
 
 import coverImage from "@/assets/image/cover.jpg";
 import Header from "@/components/layout/Header";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
 import { HERO_VARIANTS, HERO_IMAGE_VARIANTS } from "@/lib/animations";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { useLenis } from "lenis/react";
@@ -103,12 +104,13 @@ export default function HeroSection() {
                 custom={1}
               >
                 <p className="text-base max-w-[260px] text-balance text-foreground/60 font-medium">{t("tagline")}</p>
-                <div>
+                <div className="w-fit flex flex-col items-start gap-3">
                   <CtaButton
                     label={t("cta")}
                     onClick={() => scrollTo("contact")}
                     className="px-5 py-4 rounded-full text-sm"
                   />
+                  <LocaleSwitcher className="self-center" />
                 </div>
               </motion.div>
 
@@ -163,12 +165,13 @@ export default function HeroSection() {
                     <p className="text-2xl xl:text-3xl tracking-tight leading-[1.4] max-w-[32ch] text-balance text-foreground/60 font-medium">
                       {t("tagline")}
                     </p>
-                    <div>
+                    <div className="w-fit flex flex-col items-start gap-6">
                       <CtaButton
                         label={t("cta")}
                         onClick={() => scrollTo("contact")}
                         className="tracking-tight px-4 py-3 text-xs md:px-6 md:py-4 md:text-base lg:px-8 lg:py-5 lg:text-lg rounded-full"
                       />
+                      <LocaleSwitcher className="self-center md:text-sm" />
                     </div>
                   </div>
                 </div>

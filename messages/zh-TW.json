@@ -74,30 +74,35 @@
     "heading": "精選作品 /",
     "label": "（專案）",
     "intro": "致力於打造兼具實用與美感的產品體驗，讓產品流暢、易用且富有質感。",
+    "overviewLabel": "簡介",
     "projects": [
       {
         "category": "現代作品集網站",
         "title": "My Profolio",
         "year": "2026",
-        "tags": ["Next.js", "Framer Motion"]
+        "tags": ["Next.js", "Framer Motion"],
+        "summary": "獨立打造的多個人作品集，用於展示個人的全端能力與精選專案。接入平滑滾動和動效，控制頁面的整體節奏更能抓住訪客的注意。"
       },
       {
         "category": "SaaS 平台",
         "title": "燼紋外設",
         "year": "2026",
-        "tags": ["Next.js", "Nest"]
+        "tags": ["Next.js", "Nest"],
+        "summary": "瀏覽器端鍵帽視覺化訂製平台，覆蓋設計、3D 預覽、生產治具匯出與支付下單。支援 ToC 支付與 ToB 企業協作，完成設計到生產的全流程。"
       },
       {
         "category": "SaaS 平台",
         "title": "Hynel Energy",
         "year": "2025",
-        "tags": ["Vue", "全端"]
+        "tags": ["Vue", "全端"],
+        "summary": "電力市場數據分析與電價預測 SaaS，覆蓋dashboard視覺化、預測對照與訂閱支付，實現廣東與歐洲的電價市場多維可视化分析。"
       },
       {
         "category": "桌面應用",
         "title": "Vehicle Search Script",
         "year": "2025",
-        "tags": ["Electron", "工具"]
+        "tags": ["Electron", "工具"],
+        "summary": "Electron 桌面端車輛協尋工具：批量匯入車牌、多執行緒自動化檢索停車紀錄，命中後即時推送。支援雙模式抓取、代理管控與一鍵打包交付。"
       }
     ]
   },
@@ -150,8 +155,8 @@
   },
   "LocaleSwitcher": {
     "label": "語言",
-    "en": "English",
-    "zhCN": "简体中文",
-    "zhTW": "繁體中文"
+    "en": "EN",
+    "zhCN": "简",
+    "zhTW": "繁"
   }
 }

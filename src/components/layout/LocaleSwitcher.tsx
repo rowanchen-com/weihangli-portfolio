@@ -21,23 +21,36 @@ export default function LocaleSwitcher({
 
   const active =
     tone === "onDark"
-      ? "font-semibold text-secondary-foreground underline underline-offset-4"
-      : "font-semibold text-foreground underline underline-offset-4";
+      ? "font-medium text-secondary-foreground"
+      : "font-medium text-foreground/80";
   const inactive =
     tone === "onDark"
-      ? "text-secondary-foreground/70 hover:text-secondary-foreground"
-      : "text-foreground/55 hover:text-foreground/90";
+      ? "text-secondary-foreground/45 hover:text-secondary-foreground"
+      : "text-muted-foreground hover:text-foreground/70";
+  const divider =
+    tone === "onDark" ? "text-secondary-foreground/25" : "text-muted-foreground/35";
 
   return (
-    <nav className={className} aria-label={t("label")}>
-      <ul className="flex flex-wrap items-center gap-x-2 gap-y-1">
-        {LOCALES.map((code) => (
-          <li key={code}>
+    <nav
+      className={cn(
+        "font-mono text-xs uppercase tracking-wider",
+        className,
+      )}
+      aria-label={t("label")}
+    >
+      <ul className="flex flex-wrap items-center gap-x-2">
+        {LOCALES.map((code, index) => (
+          <li key={code} className="flex items-center gap-x-2">
+            {index > 0 && (
+              <span className={divider} aria-hidden>
+                /
+              </span>
+            )}
             <Link
               href={pathname}
               locale={code}
               className={cn(
-                "transition-colors",
+                "transition-colors duration-200",
                 locale === code ? active : inactive,
               )}
             >

@@ -1,101 +1,162 @@
-import React, { forwardRef } from 'react';
+"use client";
+
+import React, { forwardRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import Badge from "@/components/badge/Badge";
 import DecryptedText from "@/components/text/DecryptedText";
 import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
-    bgImage: string;
-    /** 内层预览图（替代 Video Placeholder），后续可换为视频 */
-    previewImage?: string;
-    category: string;
-    title: string;
-    year: string;
-    tags?: string[];
-    videoElement?: React.ReactNode; // 预留给视频播放器的插槽
-    className?: string;
+  bgImage: string;
+  /** 内层预览图（替代 Video Placeholder），后续可换为视频 */
+  previewImage?: string;
+  category: string;
+  title: string;
+  year: string;
+  tags?: string[];
+  summary: string;
+  overviewLabel: string;
+  videoElement?: React.ReactNode;
+  className?: string;
 }
 
-const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(({
-    bgImage,
-    previewImage,
-    category,
-    title,
-    year,
-    tags = ["Development"],
-    videoElement,
-    className
-}: ProjectCardProps, ref) => {
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
+  (
+    {
+      bgImage,
+      previewImage,
+      category,
+      title,
+      year,
+      tags = ["Development"],
+      summary,
+      overviewLabel,
+      videoElement,
+      className,
+    }: ProjectCardProps,
+    ref
+  ) => {
+    const [hovered, setHovered] = useState(false);
+    const prefersReducedMotion = useReducedMotion();
+    const duration = prefersReducedMotion ? 0 : 0.5;
+
     return (
-        <div className={cn("space-y-2", className)}>
-            {/* 卡片容器 */}
-            <div
-                ref={ref}
-                className="relative flex aspect-square items-center justify-center overflow-hidden rounded-md p-7 sm:p-9 xl:p-18"
+      <div
+        className={cn("space-y-2", className)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div
+          ref={ref}
+          className="relative flex aspect-square items-start justify-center overflow-hidden rounded-md p-7 sm:p-9 xl:p-18"
+        >
+          <img
+            src={bgImage}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+
+          <div className="relative z-10 w-full">
+            <motion.div
+              className="relative z-10 w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-100/90 shadow-2xl will-change-transform"
+              animate={{
+                y: hovered && !prefersReducedMotion ? -12 : 0,
+                scale: hovered && !prefersReducedMotion ? 1.02 : 1,
+              }}
+              transition={{ duration, ease: EASE }}
             >
-
-                {/* 背景图 */}
+              {videoElement ? (
+                videoElement
+              ) : previewImage ? (
                 <img
-                    src={bgImage}
-                    alt={title}
-                    className="absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ease-in-out"
+                  src={previewImage}
+                  alt={title}
+                  className="h-full w-full object-cover object-top"
                 />
-
-                {/* 视频/内容容器 */}
-                <div className="relative z-10 w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-100/90 shadow-2xl">
-                    {videoElement ? (
-                        videoElement
-                    ) : previewImage ? (
-                        <img
-                            src={previewImage}
-                            alt={title}
-                            className="h-full w-full object-cover object-top"
-                        />
-                    ) : (
-                        <div className="flex h-full w-full items-center justify-center text-gray-400">
-                            Video Placeholder
-                        </div>
-                    )}
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-gray-400">
+                  Video Placeholder
                 </div>
-            </div>
+              )}
+            </motion.div>
 
-            {/* 底部信息 */}
-            <div className="flex flex-col justify-between gap-y-4 lg:flex-row">
-
-                {/* 左侧标题区 */}
-                <div className="flex flex-col gap-y-2">
-                    <DecryptedText
-                        stagger={48}
-                        duration={330}
-                        scrambleSpeed={34}
-                        className="block font-mono font-medium text-secondary-foreground/70 tracking-tight leading-none uppercase"
-                    >
-                        {category}
-                    </DecryptedText>
-                    <DecryptedText
-                        stagger={48}
-                        duration={330}
-                        scrambleSpeed={34}
-                        className="block text-[clamp(27px,2.5vw,43px)] font-semibold leading-none tracking-tighter"
-                    >
-                        {title}
-                    </DecryptedText>
-                </div>
-
-                {/* 右侧标签区 */}
-                <div className="flex items-end gap-x-2">
-                    {tags.map((tag) => (
-                        <Badge key={tag} variant="outline">
-                            {tag}
-                        </Badge>
-                    ))}
-                    <Badge variant="filled">
-                        {year}
-                    </Badge>
-                </div>
-            </div>
+            {/* Desktop: slides out from under preview onto the bg band */}
+            <motion.div
+              className="pointer-events-none absolute top-full left-0 right-0 z-0 hidden pt-3 md:block"
+              initial={false}
+              animate={
+                prefersReducedMotion
+                  ? { y: 0, opacity: hovered ? 1 : 0 }
+                  : {
+                      y: hovered ? 0 : "-100%",
+                      opacity: hovered ? 1 : 0,
+                    }
+              }
+              transition={{
+                duration,
+                ease: EASE,
+                opacity: {
+                  duration: prefersReducedMotion ? 0 : 0.4,
+                  delay: hovered && !prefersReducedMotion ? 0.05 : 0,
+                },
+              }}
+            >
+              <p className="mb-1.5 font-mono text-xs font-medium uppercase tracking-tight text-white/70 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                {overviewLabel}
+              </p>
+              <p className="max-w-[52ch] text-sm leading-snug text-white/90 line-clamp-3 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] md:text-[0.95rem]">
+                {summary}
+              </p>
+            </motion.div>
+          </div>
         </div>
+
+        <div className="flex flex-col justify-between gap-y-4 lg:flex-row">
+          <div className="flex flex-col gap-y-2">
+            <DecryptedText
+              stagger={48}
+              duration={330}
+              scrambleSpeed={34}
+              className="block font-mono font-medium text-secondary-foreground/70 tracking-tight leading-none uppercase"
+            >
+              {category}
+            </DecryptedText>
+            <DecryptedText
+              stagger={48}
+              duration={330}
+              scrambleSpeed={34}
+              className="block text-[clamp(27px,2.5vw,43px)] font-semibold leading-none tracking-tighter"
+            >
+              {title}
+            </DecryptedText>
+          </div>
+
+          <div className="flex items-end gap-x-2">
+            {tags.map((tag) => (
+              <Badge key={tag} variant="outline">
+                {tag}
+              </Badge>
+            ))}
+            <Badge variant="filled">{year}</Badge>
+          </div>
+        </div>
+
+        {/* Mobile: always-visible summary under title meta */}
+        <div className="space-y-1.5 md:hidden">
+          <p className="font-mono text-xs font-medium uppercase tracking-tight text-secondary-foreground/50">
+            {overviewLabel}
+          </p>
+          <p className="max-w-[52ch] text-sm leading-snug text-secondary-foreground/70">
+            {summary}
+          </p>
+        </div>
+      </div>
     );
-});
+  }
+);
 
 ProjectCard.displayName = "ProjectCard";
 

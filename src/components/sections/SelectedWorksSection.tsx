@@ -31,11 +31,13 @@ type ProjectCopy = {
   title: string;
   year: string;
   tags: string[];
+  summary: string;
 };
 
 export default function SelectedWorksSection() {
   const t = useTranslations("Works");
   const projects = t.raw("projects") as ProjectCopy[];
+  const overviewLabel = t("overviewLabel");
   const merged = PROJECT_ASSETS.map((assets, idx) => ({
     ...assets,
     ...projects[idx],
@@ -77,6 +79,7 @@ export default function SelectedWorksSection() {
             <ProjectCard
               key={`${project.title}-${idx}`}
               ref={setItemRef(idx)}
+              overviewLabel={overviewLabel}
               {...project}
             />
           ))}

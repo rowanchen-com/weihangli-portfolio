@@ -74,30 +74,35 @@
     "heading": "SELECTED WORKS /",
     "label": "(PROJECTS)",
     "intro": "Thoughtfully crafted digital experiences that blend utility and aesthetics into something functional, memorable, and refined.",
+    "overviewLabel": "Overview",
     "projects": [
       {
         "category": "Modern Portfolio Website",
         "title": "My Profolio",
         "year": "2026",
-        "tags": ["Next.js", "Framer Motion"]
+        "tags": ["Next.js", "Framer Motion"],
+        "summary": "A self-designed single-page portfolio that presents full-stack craft and selected work to a global audience. Built with Next.js for localized routing and a contact-form email loop, plus GSAP / Motion / Lenis for smooth scroll and entrance motion."
       },
       {
         "category": "SaaS Platform",
         "title": "Jinwen Peripherals",
         "year": "2026",
-        "tags": ["Next.js", "Nest"]
+        "tags": ["Next.js", "Nest"],
+        "summary": "A browser-based keycap design and fulfillment platform that connects visual customization, production jig export, and checkout. Features a layer-based editor, Three.js dye-sublimation 3D preview, and B2B / B2C collaboration with monthly settlement."
       },
       {
         "category": "SaaS Platform",
         "title": "Hynel Energy",
         "year": "2025",
-        "tags": ["Vue", "Full-stack"]
+        "tags": ["Vue", "Full-stack"],
+        "summary": "An energy-market analytics and price-forecasting SaaS spanning dashboards, CMS, and subscription payments. Delivers multi-dimensional time-series and map visuals with ECharts and MapLibre, plus JWT / RBAC auth and an Alipay subscription loop."
       },
       {
         "category": "Desktop Application",
         "title": "Vehicle Search Script",
         "year": "2025",
-        "tags": ["Electron", "Tooling"]
+        "tags": ["Electron", "Tooling"],
+        "summary": "A desktop vehicle-search tool that batch-imports plates, runs multi-threaded parking lookups, and pushes Telegram alerts on hits. Supports Selenium and pure-HTTP scrapers, proxy pooling with traffic controls, and live status over WebSocket."
       }
     ]
   },
@@ -150,8 +155,8 @@
   },
   "LocaleSwitcher": {
     "label": "Language",
-    "en": "English",
-    "zhCN": "简体中文",
-    "zhTW": "繁體中文"
+    "en": "EN",
+    "zhCN": "简",
+    "zhTW": "繁"
   }
 }
