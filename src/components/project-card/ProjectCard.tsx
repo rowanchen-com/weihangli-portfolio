@@ -50,7 +50,7 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
       >
         <div
           ref={ref}
-          className="relative flex aspect-square items-start justify-center overflow-hidden rounded-md p-7 sm:p-9 xl:p-18"
+          className="relative flex aspect-square items-center justify-center overflow-hidden rounded-md p-7 sm:p-9 xl:p-18"
         >
           <img
             src={bgImage}
@@ -59,11 +59,11 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
 
+          {/* In-flow stack so preview (+ overview on hover) stay vertically centered as a group */}
           <div className="relative z-10 w-full">
             <motion.div
               className="relative z-10 w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-100/90 shadow-2xl will-change-transform"
               animate={{
-                y: hovered && !prefersReducedMotion ? -12 : 0,
                 scale: hovered && !prefersReducedMotion ? 1.02 : 1,
               }}
               transition={{ duration, ease: EASE }}
@@ -83,33 +83,31 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
               )}
             </motion.div>
 
-            {/* Desktop: slides out from under preview onto the bg band */}
+            {/* Desktop: expands in flow so the whole group re-centers on the bg */}
             <motion.div
-              className="pointer-events-none absolute top-full left-0 right-0 z-0 hidden pt-3 md:block"
+              className="pointer-events-none hidden overflow-hidden md:block"
               initial={false}
-              animate={
-                prefersReducedMotion
-                  ? { y: 0, opacity: hovered ? 1 : 0 }
-                  : {
-                      y: hovered ? 0 : "-100%",
-                      opacity: hovered ? 1 : 0,
-                    }
-              }
+              animate={{
+                height: hovered ? "auto" : 0,
+                opacity: hovered ? 1 : 0,
+              }}
               transition={{
                 duration,
                 ease: EASE,
                 opacity: {
-                  duration: prefersReducedMotion ? 0 : 0.4,
+                  duration: prefersReducedMotion ? 0 : 0.35,
                   delay: hovered && !prefersReducedMotion ? 0.05 : 0,
                 },
               }}
             >
-              <p className="mb-1.5 font-mono text-xs font-medium uppercase tracking-tight text-white/70 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
-                {overviewLabel}
-              </p>
-              <p className="max-w-[52ch] text-sm leading-snug text-white/90 line-clamp-3 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] md:text-[0.95rem]">
-                {summary}
-              </p>
+              <div className="pt-3">
+                <p className="mb-1.5 font-mono text-xs font-medium uppercase tracking-tight text-white/70 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                  {overviewLabel}
+                </p>
+                <p className="max-w-[52ch] text-sm leading-snug text-white/90 line-clamp-3 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] md:text-[0.95rem]">
+                  {summary}
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
