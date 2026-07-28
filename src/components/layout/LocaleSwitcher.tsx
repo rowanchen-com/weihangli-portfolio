@@ -4,7 +4,15 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-const LOCALES = ["en", "zh-CN", "zh-TW"] as const;
+const LOCALES = ["en", "zh-CN", "zh-TW", "ja", "ko"] as const;
+
+const LOCALE_LABEL_KEYS = {
+  en: "en",
+  "zh-CN": "zhCN",
+  "zh-TW": "zhTW",
+  ja: "ja",
+  ko: "ko",
+} as const;
 
 type Tone = "default" | "onDark";
 
@@ -54,7 +62,7 @@ export default function LocaleSwitcher({
                 locale === code ? active : inactive,
               )}
             >
-              {code === "en" ? t("en") : code === "zh-CN" ? t("zhCN") : t("zhTW")}
+              {t(LOCALE_LABEL_KEYS[code])}
             </Link>
           </li>
         ))}

@@ -16,7 +16,7 @@ const figtree = Figtree({
   variable: "--font-figtree",
 });
 
-// 构建时（Build Time）告诉 Next.js：“我有 en, zh-CN, zh-TW 这几种语言，请把它们全部预渲染成静态 HTML”。
+// 构建时（Build Time）告诉 Next.js：“我有 en, zh-CN, zh-TW, ja, ko 这几种语言，请把它们全部预渲染成静态 HTML”。
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

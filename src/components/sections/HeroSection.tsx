@@ -50,7 +50,15 @@ export default function HeroSection() {
   const todayLabel = useMemo(() => {
     const d = new Date();
     const loc =
-      locale === "zh-TW" ? "zh-TW" : locale === "zh-CN" ? "zh-CN" : "en-US";
+      locale === "zh-TW"
+        ? "zh-TW"
+        : locale === "zh-CN"
+          ? "zh-CN"
+          : locale === "ja"
+            ? "ja-JP"
+            : locale === "ko"
+              ? "ko-KR"
+              : "en-US";
     return new Intl.DateTimeFormat(loc, {
       month: "short",
       day: "2-digit",

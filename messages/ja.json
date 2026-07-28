@@ -1,0 +1,164 @@
+{
+  "Metadata": {
+    "title": "李偉航 - フルスタック開発者",
+    "description": "李偉航 - フルスタック開発者"
+  },
+  "Nav": {
+    "home": "ホーム",
+    "services": "サービス",
+    "works": "作品",
+    "about": "について",
+    "contact": "お問い合わせ"
+  },
+  "Header": {
+    "roleMobile1": "フルスタック",
+    "roleMobile2": "開発者",
+    "roleDesktop": "フルスタック開発者"
+  },
+  "NavOverlay": {
+    "emailLabel": "メールアドレス",
+    "copyEmail": "メールをコピー",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp"
+  },
+  "Hero": {
+    "tagline": "高性能でモダンなソフトウェアづくりに取り組んでいます。フルスタック開発者として、世界中のクライアントに開発サービスを提供しています",
+    "cta": "お問い合わせ",
+    "imageAlt": "プロフィール写真",
+    "availabilityMobileLine1": "現在",
+    "availabilityMobileLine2": "受付中",
+    "availabilityDesktop": "現在受付中"
+  },
+  "WhatIDo": {
+    "heading": "できること /",
+    "label": "（サービス）",
+    "intro": "高性能で安定し、使いやすいフルスタックアプリの構築に注力しています。複雑なアイデアをリリース可能なプロダクトに落とし込み、ビジネスの継続的な成長を支えます。",
+    "services": [
+      {
+        "number": "01",
+        "title": "フルスタック",
+        "description": "直感的なフロントエンド体験から堅牢なバックエンド設計まで、エンドツーエンドの開発を提供します。モダンな技術スタックで、拡張可能でリリース可能なアプリを構築します。",
+        "skills": [
+          "React、Vue、Tailwind CSS",
+          "Node.js、Spring Boot",
+          "Git、Docker、Vercel、Alibaba Cloud"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "パフォーマンスと最適化",
+        "description": "確かなエンジニアリング原則に基づき、信頼性が高く拡張可能なシステムを構築します。アプリを速く、安定させ、長期的な進化にも耐えられるようにします。",
+        "skills": [
+          "データ構造とアルゴリズム",
+          "データベース、OOP、OSの基礎",
+          "スケーラブルなシステムとデータパイプライン"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "AI 支援",
+        "description": "AI 時代において、各種 AI ツールで開発を加速しつつ、高いエンジニアリング水準を維持します。迅速なプロトタイプから、構造が明確で拡張可能なシステムまで対応します。",
+        "skills": [
+          "Cursor、Codex、Claude",
+          "迅速なプロトタイピングと反復",
+          "コード品質とレビュー"
+        ]
+      }
+    ]
+  },
+  "Works": {
+    "heading": "厳選作品 /",
+    "label": "（プロジェクト）",
+    "intro": "実用性と美しさを兼ね備えたプロダクト体験づくりに取り組み、滑らかで使いやすく、質感のある仕上がりを目指します。",
+    "overviewLabel": "概要",
+    "projects": [
+      {
+        "category": "モダンなポートフォリオサイト",
+        "title": "My Profolio",
+        "year": "2026",
+        "tags": ["Next.js", "Framer Motion"],
+        "summary": "フルスタックの実力と厳選プロジェクトを伝えるために、自ら構築したポートフォリオ。スムーズスクロールとモーションでページのリズムを整え、訪問者の注目を引きます。"
+      },
+      {
+        "category": "SaaS プラットフォーム",
+        "title": "燼紋外設",
+        "year": "2026",
+        "tags": ["Next.js", "Nest"],
+        "summary": "ブラウザ上でキーキャップをビジュアルカスタムできるプラットフォーム。デザイン、3Dプレビュー、治具エクスポート、決済・注文までをカバー。ToC決済とToB企業協業に対応し、設計から生産までの一気通貫を実現。"
+      },
+      {
+        "category": "SaaS プラットフォーム",
+        "title": "Hynel Energy",
+        "year": "2025",
+        "tags": ["Vue", "フルスタック"],
+        "summary": "電力市場のデータ分析と価格予測 SaaS。ダッシュボード可視化、予測比較、サブスクリプション決済を備え、広東と欧州の電力価格市場を多次元で可視化・分析。"
+      },
+      {
+        "category": "デスクトップアプリ",
+        "title": "Vehicle Search Script",
+        "year": "2025",
+        "tags": ["Electron", "ツール"],
+        "summary": "Electron 製の車両協尋デスクトップツール。ナンバープレートの一括取り込み、マルチスレッドでの駐車記録自動検索、ヒット時のリアルタイム通知に対応。二方式スクレイピング、プロキシ管理、ワンクリック配布も可能。"
+      }
+    ]
+  },
+  "About": {
+    "line1": "開発者",
+    "line2": "デザイナー",
+    "line3": "クリエイター/",
+    "skillsHeading": "技術スタック",
+    "skillGroups": [
+      { "title": "言語" },
+      { "title": "フレームワークとライブラリ" },
+      { "title": "ツールとデータベース" }
+    ],
+    "aboutImageAlt": "アバウト画像",
+    "lead": "フルスタック開発者兼デザイナーとして、高性能なデジタルプロダクトづくりに注力し、複雑なビジネスロジックと滑らかなユーザー体験のバランスを追求しています。",
+    "aboutLabel": "（私について）",
+    "p1": "React、Node.js から Spring Boot、Python まで幅広い技術スタックで、拡張性が高く安定した高負荷耐性のアプリを構築します。Web、モバイル、デスクトップを問わず、スタートアップや企業向けにエンドツーエンドのソリューションを提供します。",
+    "p2": "マイクロインタラクションと細部のモーションが、プロダクト体験を大きく高めると信じています。方針は明確です。エンジニアリングで信頼性を担保し、デザインで体験を高め、細部を磨き続けて「使える」から「心地よい」へ引き上げます。"
+  },
+  "Contact": {
+    "heading": "アイデアを一緒に形に",
+    "subheading": "相談したいプロジェクトはありますか？"
+  },
+  "Form": {
+    "namePlaceholder": "お名前",
+    "emailPlaceholder": "メールアドレス",
+    "messagePlaceholder": "ビジネスやプロジェクトについて簡単にご記入ください",
+    "nameRequired": "お名前を入力してください",
+    "emailRequired": "メールアドレスを入力してください",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "messageRequired": "プロジェクトについてご記入ください",
+    "submitSending": "送信中…",
+    "submitIdle": "お問い合わせ！",
+    "successTitle": "受け取りました！できるだけ早くご返信します。",
+    "successAgain": "もう一通送る",
+    "errorTitle": "エラーが発生しました。もう一度お試しください。",
+    "errorBack": "戻る"
+  },
+  "Footer": {
+    "menu": "メニュー",
+    "socials": "ソーシャル",
+    "wechat": "WeChat",
+    "wechatQrAlt": "WeChat QRコード",
+    "github": "Github",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "localTime": "広東",
+    "scrollToTop": "ページ上部へ"
+  },
+  "LocaleSwitcher": {
+    "label": "言語",
+    "en": "EN",
+    "zhCN": "简",
+    "zhTW": "繁",
+    "ja": "JA",
+    "ko": "KO"
+  }
+}

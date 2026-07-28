@@ -34,7 +34,15 @@ function LocalClock() {
     const update = () => {
       setTime(
         new Date().toLocaleTimeString(
-          locale === "en" ? "en-US" : locale === "zh-TW" ? "zh-TW" : "zh-CN",
+          locale === "en"
+            ? "en-US"
+            : locale === "zh-TW"
+              ? "zh-TW"
+              : locale === "ja"
+                ? "ja-JP"
+                : locale === "ko"
+                  ? "ko-KR"
+                  : "zh-CN",
           {
             hour: "2-digit",
             minute: "2-digit",
