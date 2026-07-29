@@ -27,7 +27,7 @@ export function FormStatusOverlay({ status, onReset }: FormStatusOverlayProps) {
         </>
       ) : (
         <>
-          <p className="text-red-400 font-medium text-lg">
+          <p className="text-destructive font-medium text-lg">
             {t("errorTitle")}
           </p>
           <button type="button" onClick={onReset} className={resetClass}>

@@ -1,9 +1,9 @@
 "use client";
 
-import clsx from "clsx";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 import { FormField } from "./form-field";
 import { FormSubmitButton } from "./form-button";
 import { FormStatusOverlay } from "./form-status";
@@ -55,7 +55,7 @@ export default function ContactForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className={clsx(
+        className={cn(
           "space-y-1 sm:space-y-4 transition-opacity duration-300",
           status === "success" || status === "error"
             ? "opacity-0 pointer-events-none"

@@ -8,15 +8,15 @@ A single-page portfolio site for **Weihang Li** (Full Stack Developer), built wi
 
 - Section-based landing page (hero, what I do, selected works, about, contact, footer)
 - Project cards with imagery and scroll-linked interactions
-- Smooth scrolling (Lenis) and animation (GSAP, Motion)
+- Smooth scrolling (Lenis) and animation (Motion)
 - Contact form that posts to a server route and sends email via [Resend](https://resend.com)
 
 ## Tech stack
 
 - **Framework:** Next.js 16 (App Router), React 19, TypeScript
 - **Styling:** Tailwind CSS 4
-- **UI:** Radix UI primitives, Lucide icons, class-variance-authority / clsx / tailwind-merge
-- **Motion:** GSAP, Motion, `@gsap/react`
+- **UI:** Lucide icons, clsx / tailwind-merge; custom Spinner, RollingText, WeChat hover panel
+- **Motion:** Motion
 - **Scrolling:** Lenis
 - **Forms:** react-hook-form
 - **Email:** Resend + `@react-email/components` for the outgoing template

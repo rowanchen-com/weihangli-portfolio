@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
 export type FormFieldProps = {
   placeholder: string;
@@ -49,8 +49,8 @@ export const FormField = forwardRef<
           />
         )}
         <p
-          className={clsx(
-            "text-red-400 text-sm mt-0.5 sm:mt-1 h-3 sm:h-4 transition-all duration-300",
+          className={cn(
+            "text-destructive text-sm mt-0.5 sm:mt-1 h-3 sm:h-4 transition-all duration-300",
             error ? "opacity-100" : "opacity-0",
           )}
         >

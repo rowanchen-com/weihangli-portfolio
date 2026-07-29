@@ -17,9 +17,8 @@ export function useActiveWorkIndex(count: number) {
   const countRef = useRef(count);
   const rafRef = useRef<number | null>(null);
 
-  countRef.current = count;
-
   useEffect(() => {
+    countRef.current = count;
     itemsRef.current.length = count;
     setActiveIndex((prev) => {
       if (count <= 0) {

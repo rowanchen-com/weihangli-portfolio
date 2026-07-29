@@ -1,6 +1,7 @@
 "use client";
 
 import React, { forwardRef, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import Badge from "@/components/badge/Badge";
 import DecryptedText from "@/components/text/DecryptedText";
@@ -52,17 +53,19 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           ref={ref}
           className="relative flex aspect-square items-center justify-center overflow-hidden rounded-md p-7 sm:p-9 xl:p-18"
         >
-          <img
+          <Image
             src={bgImage}
             alt=""
             aria-hidden
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-center"
           />
 
           {/* In-flow stack so preview (+ overview on hover) stay vertically centered as a group */}
           <div className="relative z-10 w-full">
             <motion.div
-              className="relative z-10 w-full aspect-[4/3] overflow-hidden rounded-lg bg-gray-100/90 shadow-2xl will-change-transform"
+              className="relative z-10 w-full aspect-[4/3] overflow-hidden rounded-lg bg-background/90 shadow-2xl will-change-transform"
               animate={{
                 scale: hovered && !prefersReducedMotion ? 1.02 : 1,
               }}
@@ -71,13 +74,15 @@ const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
               {videoElement ? (
                 videoElement
               ) : previewImage ? (
-                <img
+                <Image
                   src={previewImage}
                   alt={title}
-                  className="h-full w-full object-cover object-top"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-top"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-gray-400">
+                <div className="flex h-full w-full items-center justify-center text-muted-foreground">
                   Video Placeholder
                 </div>
               )}

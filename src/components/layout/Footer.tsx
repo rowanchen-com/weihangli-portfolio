@@ -7,11 +7,6 @@ import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { SECTION_IDS } from "@/components/scroll/config";
 import { useScrollTo } from "@/hooks/useScrollTo";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { RollingText } from "@/components/ui/RollingText";
 
 type SocialItem =
@@ -64,34 +59,44 @@ function LocalClock() {
 function WeChatItem({ label, qrAlt }: { label: string; qrAlt: string }) {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          className="group text-secondary/60 tracking-tighter hover:text-secondary/80 transition-colors overflow-hidden cursor-default"
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-        >
-          <RollingText className="text-base sm:text-lg lg:text-xl">{label}</RollingText>
-        </button>
-      </PopoverTrigger>
-      <PopoverContent
-        side="top"
-        align="center"
-        className="w-auto p-2"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="true"
+        className="group text-secondary/60 tracking-tighter hover:text-secondary/80 transition-colors overflow-hidden cursor-default"
       >
-        <Image
-          src="/images/footer/wechat.webp"
-          alt={qrAlt}
-          width={160}
-          height={160}
-          className="rounded-md"
-        />
-      </PopoverContent>
-    </Popover>
+        <RollingText className="text-base sm:text-lg lg:text-xl">{label}</RollingText>
+      </button>
+      {open && (
+        <div
+          role="tooltip"
+          className="absolute bottom-full left-1/2 z-10 mb-2 w-40 -translate-x-1/2 rounded-md border bg-background p-2 shadow-md"
+        >
+          <Image
+            src="/images/footer/wechat.webp"
+            alt={qrAlt}
+            width={160}
+            height={160}
+            className="size-full rounded-md"
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -182,7 +187,7 @@ export default function Footer() {
       </div>
 
       <div className="flex w-full items-end justify-between md:grid md:grid-cols-12 gap-x-8">
-        <span className="text-4xl font-semibold tracking-tighter text-secondary/80 md:col-span-6 md:text-5xl"></span>
+        <div className="hidden md:col-span-6 md:block" aria-hidden />
 
         <div className="flex flex-col text-sm md:col-span-3">
           <span className="font-bold uppercase tracking-tighter text-secondary/80 text-base sm:text-lg">

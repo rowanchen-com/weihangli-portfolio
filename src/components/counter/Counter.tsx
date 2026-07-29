@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useLayoutEffect, useRef, useState, type Ref } from "react";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 type CounterProps = {
   value: number;
@@ -27,7 +27,7 @@ function Digit({
 }) {
   return (
     <div
-      className={clsx("overflow-hidden leading-[0.8]", digitClassName)}
+      className={cn("overflow-hidden", digitClassName, "leading-[0.8]")}
       style={{ height: height || "auto" }}
     >
       <motion.div
@@ -75,7 +75,7 @@ export default function Counter({
     .split("");
 
   return (
-    <div className={clsx("flex", className)}>
+    <div className={cn("flex", className)}>
       {digitList.map((d, i) => (
         <Digit
           key={i}

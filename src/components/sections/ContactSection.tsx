@@ -19,7 +19,7 @@ export default function ContactSection() {
         </h2>
 
         <div className="w-full sm:max-w-[36rem] mx-auto my-5 sm:my-10 px-4 sm:px-10 py-6 md:py-12 xl:px-14 rounded-2xl backdrop-blur-sm border surface-contact-form">
-          <p className="text-center text-xl sm:text-2xl lg:text-3xl font-medium mb-8 text-stone-200 tracking-tight">
+          <p className="text-center text-xl sm:text-2xl lg:text-3xl font-medium mb-8 text-secondary-foreground tracking-tight">
             {t("subheading")}
           </p>
 

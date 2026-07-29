@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 type BadgeProps = {
     children: React.ReactNode;
@@ -13,14 +13,11 @@ export default function Badge({
 }: BadgeProps) {
     return (
         <span
-            className={clsx(
+            className={cn(
                 "rounded-full px-3 py-1 text-xs lg:text-sm font-medium tracking-tight",
                 {
-                    // outline 样式
                     "border-[1.75px] border-secondary-foreground/70 text-secondary-foreground/70 uppercase":
                         variant === "outline",
-
-                    // filled 样式
                     "bg-secondary-foreground/70 text-secondary":
                         variant === "filled",
                 },

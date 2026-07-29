@@ -1,12 +1,16 @@
 import { EmailTemplate } from '@/components/email/email-template';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        return Response.json({ error: '邮件服务未配置' }, { status: 500 });
+    }
+
     try {
         const body = await request.json();
         const { name, email, message } = body;
+        const resend = new Resend(apiKey);
 
         const { data, error } = await resend.emails.send({
             from: 'Weihang Li Portfolio <onboarding@resend.dev>',
@@ -20,7 +24,7 @@ export async function POST(request: Request) {
         }
 
         return Response.json({ success: true, data });
-    } catch (error) {
+    } catch {
         return Response.json({ error: '服务器内部错误' }, { status: 500 });
     }
 }

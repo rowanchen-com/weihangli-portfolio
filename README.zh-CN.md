@@ -8,15 +8,15 @@
 
 - 按区块组织的落地页（首屏、我能做什么、精选作品、关于、联系、页脚）
 - 带配图与滚动联动的项目卡片
-- 平滑滚动（Lenis）与动画（GSAP、Motion）
+- 平滑滚动（Lenis）与动画（Motion）
 - 联系表单提交到服务端路由，并通过 [Resend](https://resend.com) 发送邮件
 
 ## 技术栈
 
 - **框架：** Next.js 16（App Router）、React 19、TypeScript
 - **样式：** Tailwind CSS 4
-- **UI：** Radix UI 原语、Lucide 图标，以及 class-variance-authority / clsx / tailwind-merge
-- **动效：** GSAP、Motion、`@gsap/react`
+- **UI：** Lucide 图标、clsx / tailwind-merge；自研 Spinner、RollingText、微信悬停面板
+- **动效：** Motion
 - **滚动：** Lenis
 - **表单：** react-hook-form
 - **邮件：** Resend，出站模板使用 `@react-email/components`
