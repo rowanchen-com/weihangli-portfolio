@@ -15,6 +15,8 @@ export function useScrollTo() {
     const target = sectionId === "home" ? 0 : `#${sectionId}`;
 
     if (lenis) {
+      // Overlay menus call lenis.stop(); resume so programmatic scroll still runs.
+      if (lenis.isStopped) lenis.start();
       lenis.scrollTo(target, { duration: SCROLL_DURATION });
       return;
     }

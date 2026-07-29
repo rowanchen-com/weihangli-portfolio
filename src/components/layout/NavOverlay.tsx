@@ -148,7 +148,10 @@ export default function NavOverlay() {
                       }
                       transition={{ duration: 0.3, ease: EASE }}
                       onMouseEnter={isChinese ? () => setHoveredId(id) : undefined}
-                      onClick={() => { scrollTo(id); close(); }}
+                      onClick={() => {
+                        close();
+                        scrollTo(id);
+                      }}
                       className="group relative inline-block text-secondary-foreground font-bold uppercase leading-none tracking-tighter select-none cursor-pointer"
                       style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
                     >
